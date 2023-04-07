@@ -7,13 +7,11 @@ import awsconfig from './src/aws-exports';
 Amplify.configure(awsconfig);
 import { DataStore } from '@aws-amplify/datastore';
 import { Users, Posts } from './src/models';
-import {  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link, 
-  useNavigate} from 'react-router-dom'
+import {  BrowserRouter as Router, Routes, Route, Link, useNavigate} from 'react-router-dom'
 import { TextInput } from 'react-native-web';
 
+
+//function called after the new user signs up to create an entry in the 'Users' table
 async function newUsers(id, name, email){
   await DataStore.save(
     new Users({
@@ -25,16 +23,18 @@ async function newUsers(id, name, email){
 );
 }
 
+//listening for auto signin event after the new user signs up
+//to create a new user in the 'Users' table in the DataStore
 Hub.listen('auth', ({ payload }) => {
   const { event } = payload;
   if (event === 'autoSignIn') {
     const user = payload.data;
-    console.log("JUST SIGNED UP")
-    console.log(user)
     newUsers(user.username, user.attributes.name, user.attributes.email).then(res => console.log(res))
   }
 })
 
+//function called on clicking the signout nav link
+//uses Amplify's Auth component
 async function signOut() {
   try {
     await Auth.signOut();
@@ -43,16 +43,21 @@ async function signOut() {
   }
 }
 
+//find user's primary key used to identify posts in the 'Posts' table
 async function findUsersId(username){
   let user = await DataStore.query(Users, (c) => c.username.eq(username));
   return user[0].id
 }
+
+//fetch posts and filter them by the primary key of currently logged in user
 async function findPosts(id){
   let res = await DataStore.query(Posts, (c) => c.usersID.eq(id));
+  //reverse the result array to show latest posts first
   res.reverse()
   if(res) return res
 }
 
+//using the save method of Amplify's DataStore component to create a new post
 async function createPost(title, description, usersID){
   let id
   await DataStore.save(
@@ -64,6 +69,7 @@ async function createPost(title, description, usersID){
   ).then((r)=>{
     id = r.id
   })
+  // return id on successfull submission of post
   return id
 }
 
@@ -74,7 +80,7 @@ function App() {
   const [posts, setPosts] = useState([])
   let done = false
 
- 
+  //get current autheticated user's details to save on React State variables
   useEffect(()=>{
     Auth.currentAuthenticatedUser()
     .then((user) => {
@@ -83,11 +89,14 @@ function App() {
     })
     .catch((err) => console.log(err))
   
+    //find user's primary key randomly generated in the database 
+    //(called usersID in the 'Posts' table)
     if(username) {
       findUsersId(username).then((u) => {
         setUsersID(u)
       })
     }
+    //fetch posts by the user's primary key and set the result array in the React state
     usersID && findPosts(usersID).then((res) => {
       setPosts(res)
       done = true
@@ -95,6 +104,7 @@ function App() {
   }, [done, name, username, usersID])
 
   return (
+    //react-router-dom's router component to switch between pages / components
     <Router>
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -115,6 +125,7 @@ function App() {
   );
 
   function HomePage(){
+    //mapping the resulting array of posts to render them
     return(<>
       {name ? 
         <>{posts.length == 0 ? <h2>No Posts by {name}</h2> 
@@ -136,9 +147,11 @@ function App() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const navigate = useNavigate()
+    //called after successfull post submission
     function goBack(){
       done = false
       navigate("/")
+      //update the posts state variable after fetching new results from 'Posts' table
       findPosts(usersID).then((res) => {
         setPosts(res)
         done = true
@@ -155,6 +168,7 @@ function App() {
             <div style = {{width: '150px', paddingLeft:'10px'}}>
               <Button title = "Submit Post" onPress={() => {
                   createPost(title, description, usersID).then((id) => {
+                    //navigating back to the posts page after successfull post submission
                     if(id) goBack()
                   })
                   }
@@ -167,7 +181,7 @@ function App() {
 }
 
 
-
+//CSS styles for components
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
@@ -237,4 +251,5 @@ const styles = StyleSheet.create({
   }
 });
 
+//Amplify's withAuthenticator component handles authentication workflow
 export default withAuthenticator(App);
