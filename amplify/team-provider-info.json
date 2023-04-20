@@ -9,14 +9,30 @@
       "UnauthRoleName": "amplify-poc-dev-113829-unauthRole",
       "StackName": "amplify-poc-dev-113829",
       "StackId": "arn:aws:cloudformation:us-east-1:158871678901:stack/amplify-poc-dev-113829/c0098950-d2fe-11ed-a8df-0acf0a830499",
-      "AmplifyAppId": "d3ffx3k8j9tlfz"
+      "AmplifyAppId": "d3ffx3k8j9tlfz",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-poc-dev-113829-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
-      "api": {
-        "poc": {}
-      },
       "auth": {
         "poc": {}
+      },
+      "function": {
+        "postsFunction": {
+          "deploymentBucketName": "amplify-poc-dev-113829-deployment",
+          "s3Key": "amplify-builds/postsFunction-2f474541554a4753645a-build.zip"
+        },
+        "usersFunction": {
+          "deploymentBucketName": "amplify-poc-dev-113829-deployment",
+          "s3Key": "amplify-builds/usersFunction-4c306f6a4e6336534a31-build.zip"
+        },
+        "allPostsPython": {}
+      },
+      "api": {
+        "myAPI": {}
+      },
+      "storage": {
+        "postsDb": {},
+        "usersDb": {}
       }
     }
   }

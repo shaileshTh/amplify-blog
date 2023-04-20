@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "paths": {
+    "/users": {
+      "name": "/users",
+      "lambdaFunction": "usersFunction",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/posts": {
+      "name": "/posts",
+      "lambdaFunction": "postsFunction",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    "/all-posts": {
+      "name": "/all-posts",
+      "lambdaFunction": "allPostsPython",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
