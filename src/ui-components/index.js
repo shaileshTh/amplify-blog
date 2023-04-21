@@ -29,6 +29,7 @@ export { default as ReviewCard } from "./ReviewCard";
 export { default as MyMarketingFooter } from "./MyMarketingFooter";
 export { default as ActionCard } from "./ActionCard";
 export { default as StandardCard } from "./StandardCard";
+export { default as MyMarketingPricing } from "./MyMarketingPricing";
 export { default as MyHeroLayout1 } from "./MyHeroLayout1";
 export { default as ContactUs } from "./ContactUs";
 export { default as TallCard } from "./TallCard";

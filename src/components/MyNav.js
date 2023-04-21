@@ -57,6 +57,11 @@ export default function MyNav(props){
                         Blog
                     </Button> 
                 </Link>}
+                {props.page != 'pricing' &&<Link to = "/pricing">
+                    <Button variation = "link" style = {styles.button}>
+                        Pricing
+                    </Button> 
+                </Link>}
         </div>
         </View>
     )

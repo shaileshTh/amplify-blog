@@ -9,6 +9,7 @@ import HomePage from './src/components/HomePage'
 import NewPost from './src/components/NewPost'
 import MyPosts from './src/components/MyPosts';
 import Blog from './src/components/Blog';
+import Pricing from './src/components/Pricing';
 
 
 function App(){
@@ -19,15 +20,6 @@ function App(){
     setUsername(u.attributes.sub)
   })
   .catch(e => console.log(e))
-let n = 0;
-// useEffect(()=>{
-//   // get('myAPI', '/users').then(res=>console.log(res)).catch(e=>console.log(e))
-//   API.get('myAPI', '/posts').then((res)=>{
-//     console.log(res)
-//     n = res.length
-//   }).catch(e=>console.log(e))
- 
-//   })
   
 return(
   <Router>
@@ -36,6 +28,7 @@ return(
       <Route path = "/new-post" element = {<NewPost username = {username} name = {name}/>}/>
       <Route path = "/my-posts" element = {<MyPosts name = {name}/>}/>
       <Route path = "/blog" element = {<Blog name = {name}/>}/>
+      <Route path = "/pricing" element = {<Pricing name = {name}/>}/>
       <Route path = "/" element = {<HomePage name = {name}/>}/>
   </Routes>
   </Router>
