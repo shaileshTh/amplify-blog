@@ -1,9 +1,10 @@
 import  MyNav  from './MyNav'
 import { Heading, Divider, useTheme, Button } from '@aws-amplify/ui-react'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-web';
-import { Amplify, Auth, API } from 'aws-amplify';
+import { API } from 'aws-amplify';
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -12,22 +13,8 @@ export default function NewPost(props){
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [id, setId] = useState(0)
-    const [username, setUsername] = useState()
     const { tokens } = useTheme();
 
-    useEffect(()=>{
-      API.get('myAPI', '/posts').then((res)=>{
-          console.log(res)
-          n = res.data.length
-          setId(n + 1);
-      }).catch(err=>console.log(err))
-
-      Auth.currentAuthenticatedUser().then((u)=>{
-        setUsername(u.attributes.sub)
-      })
-      .catch(e => console.log(e))
-    },[])
-   
     return(
         <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
           <MyNav name = {props.name} page = "new-post"/>
@@ -45,11 +32,12 @@ export default function NewPost(props){
               <Button variation = "primary" onClick={() => {
                    API.post("myAPI", "/posts", {
                     body: {
-                      id: id,
+                      id: uuidv4(),
                       title: title,
                       description: description,
                       userId: 'my id',
-                      username: username,
+                      username: props.username,
+                      name: props.name,
                       createdAt: new Date().toISOString()
                     }
                   }).then((r) => {

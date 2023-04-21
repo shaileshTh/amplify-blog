@@ -20,21 +20,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "allPostsPython": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "postsFunction": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "usersFunction": {
+    "getPostsFunction": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -44,14 +30,6 @@ export type AmplifyDependentResourcesAttributes = {
   },
   "storage": {
     "postsDb": {
-      "Arn": "string",
-      "Name": "string",
-      "PartitionKeyName": "string",
-      "PartitionKeyType": "string",
-      "Region": "string",
-      "StreamArn": "string"
-    },
-    "usersDb": {
       "Arn": "string",
       "Name": "string",
       "PartitionKeyName": "string",

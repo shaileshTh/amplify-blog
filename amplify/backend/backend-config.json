@@ -8,23 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "usersFunction"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "postsFunction"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "allPostsPython"
+          "resourceName": "getPostsFunction"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -63,12 +47,7 @@
     }
   },
   "function": {
-    "allPostsPython": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "postsFunction": {
+    "getPostsFunction": {
       "build": true,
       "dependsOn": [
         {
@@ -86,67 +65,28 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "usersFunction": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributeEnvMap": {
-            "Arn": "TABLE_ARN",
-            "Name": "TABLE_NAME"
-          },
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "storage",
-          "resourceName": "usersDb"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_postsFunction_deploymentBucketName": {
+    "AMPLIFY_function_getPostsFunction_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "postsFunction"
+          "resourceName": "getPostsFunction"
         }
       ]
     },
-    "AMPLIFY_function_postsFunction_s3Key": {
+    "AMPLIFY_function_getPostsFunction_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "postsFunction"
-        }
-      ]
-    },
-    "AMPLIFY_function_usersFunction_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "usersFunction"
-        }
-      ]
-    },
-    "AMPLIFY_function_usersFunction_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "usersFunction"
+          "resourceName": "getPostsFunction"
         }
       ]
     }
   },
   "storage": {
     "postsDb": {
-      "providerPlugin": "awscloudformation",
-      "service": "DynamoDB"
-    },
-    "usersDb": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }

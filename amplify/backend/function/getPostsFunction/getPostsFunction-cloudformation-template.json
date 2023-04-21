@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "postsFunction",
+            "getPostsFunction",
             {
               "Fn::Join": [
                 "",
                 [
-                  "postsFunction",
+                  "getPostsFunction",
                   "-",
                   {
                     "Ref": "env"
@@ -97,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "pocLambdaRoledbac8fa2",
+            "pocLambdaRole3a92b483",
             {
               "Fn::Join": [
                 "",
                 [
-                  "pocLambdaRoledbac8fa2",
+                  "pocLambdaRole3a92b483",
                   "-",
                   {
                     "Ref": "env"

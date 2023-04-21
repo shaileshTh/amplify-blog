@@ -17,18 +17,18 @@ AWS.config.update({ region: process.env.TABLE_REGION });
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-let tableName = "usersDb";
+let tableName = "postsDb";
 if (process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
 }
 
 const userIdPresent = true; // TODO: update in case is required to use that definition
 const partitionKeyName = "id";
-const partitionKeyType = "N";
+const partitionKeyType = "S";
 const sortKeyName = "";
 const sortKeyType = "";
 const hasSortKey = sortKeyName !== "";
-const path = "/users";
+const path = "/posts";
 const UNAUTH = 'UNAUTH';
 const hashKeyPath = '/:' + partitionKeyName;
 const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
@@ -54,13 +54,19 @@ const convertUrlType = (param, type) => {
       return param;
   }
 }
-
 /********************************
  *   Manually added get Method   *
  ********************************/
-app.get('/users', function (req, res) {
+app.get('/posts', function (req, res) {
   var params = {
     TableName: tableName,
+    FilterExpression: '#u = :u',
+    ExpressionAttributeNames: {
+      "#u": "username",
+    },
+    ExpressionAttributeValues: {
+      ':u': req.apiGateway.event.queryStringParameters.username,
+    },
     Select: 'ALL_ATTRIBUTES',
   };
   dynamodb.scan(params, (err, data) => {

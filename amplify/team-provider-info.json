@@ -17,22 +17,17 @@
         "poc": {}
       },
       "function": {
-        "postsFunction": {
+        "allPostsPython": {},
+        "getPostsFunction": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
-          "s3Key": "amplify-builds/postsFunction-2f474541554a4753645a-build.zip"
-        },
-        "usersFunction": {
-          "deploymentBucketName": "amplify-poc-dev-113829-deployment",
-          "s3Key": "amplify-builds/usersFunction-4c306f6a4e6336534a31-build.zip"
-        },
-        "allPostsPython": {}
+          "s3Key": "amplify-builds/getPostsFunction-70436534744d4466446e-build.zip"
+        }
       },
       "api": {
         "myAPI": {}
       },
       "storage": {
-        "postsDb": {},
-        "usersDb": {}
+        "postsDb": {}
       }
     }
   }

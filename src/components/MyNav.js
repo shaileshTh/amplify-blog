@@ -32,7 +32,6 @@ export default function MyNav(props){
                 Argano
             </Text>}
             </Link>
-            
                 {props.name ? 
                         <Button variation = "link" style = {styles.button} onClick = {() => signOut()}>
                             Sign Out
@@ -53,7 +52,11 @@ export default function MyNav(props){
                         My Posts
                     </Button> 
                 </Link>}
-                
+                {props.page != 'blog' &&<Link to = "/blog">
+                    <Button variation = "link" style = {styles.button}>
+                        Blog
+                    </Button> 
+                </Link>}
         </div>
         </View>
     )
