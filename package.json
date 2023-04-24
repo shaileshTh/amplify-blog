@@ -23,6 +23,7 @@
     "react-native": "0.71.6",
     "react-native-web": "~0.18.10",
     "react-router-dom": "^6.10.0",
+    "react-use-cart": "^1.13.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native';
 import '@aws-amplify/ui-react/styles.css';
 import { Link } from 'react-router-dom'
 import { Auth } from 'aws-amplify';
+import { useCart } from "react-use-cart"
 
 async function signOut() {
-    console.log('e')
   try {
     await Auth.signOut()
     Auth.currentAuthenticatedUser().then()
@@ -15,7 +15,10 @@ async function signOut() {
   }
 }
 
+
 export default function MyNav(props){
+    const { totalItems } = useCart()
+
     return(
         <View
         as="div"
@@ -42,6 +45,11 @@ export default function MyNav(props){
                     </Button> 
                 </Link>}</>
                 }
+                {(props.name && props.page != 'cart') && <Link to = "/cart" style = {{textDecorationLine:'none'}}>
+                    <Button variation = "link" style = {styles.button}>
+                        Cart({totalItems})
+                    </Button> 
+                </Link>}
                 {(props.name && props.page != 'new-post') && <Link to = "/new-post" style = {{textDecorationLine:'none'}}>
                     <Button variation = "link" style = {styles.button}>
                         New Post
@@ -55,6 +63,11 @@ export default function MyNav(props){
                 {props.page != 'blog' &&<Link to = "/blog">
                     <Button variation = "link" style = {styles.button}>
                         Blog
+                    </Button> 
+                </Link>}
+                {props.page != 'shop' &&<Link to = "/shop">
+                    <Button variation = "link" style = {styles.button}>
+                        Shop
                     </Button> 
                 </Link>}
                 {props.page != 'pricing' &&<Link to = "/pricing">

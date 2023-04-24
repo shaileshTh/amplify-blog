@@ -2,16 +2,10 @@ import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Placeholder, Heading, Divider, useTheme } from '@aws-amplify/ui-react';
 import  MyNav  from './MyNav'
-import { useNavigate } from 'react-router-dom'
-
-
-
-    
 
 export default function Blog(props){
     const { tokens } = useTheme();
 
-    const navigate = useNavigate()
     const [loaded, setLoaded] = useState(false);
     const [posts, setPosts] = useState([])
     useEffect(()=>{

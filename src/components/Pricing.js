@@ -1,5 +1,5 @@
 import MyNav from "./MyNav";
-import { MyMarketingPricing } from '../ui-components';
+import { MyMarketingPricing, MyMarketingFooter } from '../ui-components';
 import { StyleSheet } from 'react-native';
 import { Heading, Divider, useTheme } from '@aws-amplify/ui-react';
 
@@ -17,6 +17,14 @@ export default function Pricing(props){
             </div>
             <MyMarketingPricing overrides={{
                 'MyMarketingPricing' : {width:'100%', padding: '0', marginTop:'30px'}
+            }}/>
+            <MyMarketingFooter overrides={{
+                "MyMarketingFooter":{width:'100%',marginTop:'30px'},
+                "text1" : {fontFamily:'var(--amplify-fonts-default-variable)'},
+                "text2" : {fontFamily:'var(--amplify-fonts-default-variable)'},
+                "text3" : {fontFamily:'var(--amplify-fonts-default-variable)'},
+                "text4" : {fontFamily:'var(--amplify-fonts-default-variable)'},
+                "Rectangle 738":{width:'100%', backgroundColor: 'var(--amplify-colors-overlay-70)'}
             }}/>
         </div>
     </div>)
