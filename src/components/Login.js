@@ -21,43 +21,7 @@ const navigate = useNavigate()
       <div style = {{width:'100%'}}>
         <MyNav page = "login"/>
         <br/>
-        {/* <View
-            as="div"
-            borderRadius="6px"
-            border="1px solid var(--amplify-colors-black)"
-            boxShadow="3px 3px 5px 6px var(--amplify-colors-neutral-60)"
-            color="var(--amplify-colors-blue-60)"
-            minHeight="300px"
-            maxWidth="350px"
-            margin = "2em auto 0 auto"
-            padding="1rem"
-            >
-            <Heading level={4} style = {{textAlign:'center'}}>Login</Heading>
-            <Flex as="form" direction="column" width="20rem">
-                <TextField
-                    label={
-                    <Text>
-                        Email
-                    </Text>
-                    }
-                    type="email"
-                    isRequired={true}
-                    onChange={(e)=>setEmail(e.target.value)}
-                    value={email}
-                />
-                <TextField
-                    label="Password"
-                    type="password"
-                    isRequired={true}
-                    onChange={(e)=>setPassword(e.target.value)}
-                    value={password}
-                />
-                <Button type="submit" onClick={(e)=>signIn(e)} variation = "primary">Submit</Button>
-
-                <button onClick={() => Auth.federatedSignIn()}>Open Hosted UI</button>
-                <button onClick={() => Auth.federatedSignIn({provider: 'Google' })}>Open Google</button>
-            </Flex>
-        </View> */}
+    
         <Authenticator socialProviders={['google']}>
           {() => (
             navigate("/my-posts")

@@ -13,7 +13,7 @@ export default function Pricing(props){
             id: 1,
             title: "Product #1",
             description: "Product Description. Lorem Ipsum",
-            price: "99.99",
+            price: 99.99,
             new : true,
             imgsrc : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/DZ09_smartwatch_with_home_screen_open.jpg/240px-DZ09_smartwatch_with_home_screen_open.jpg"
         },
@@ -21,7 +21,7 @@ export default function Pricing(props){
             id: 2,
             title: "Product #2",
             description: "Product Description #2. Lorem Ipsum",
-            price: "11.99",
+            price: 11.99,
             new : false,
             imgsrc : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/DZ09_smartwatch_with_home_screen_open.jpg/240px-DZ09_smartwatch_with_home_screen_open.jpg"
         },
@@ -29,7 +29,7 @@ export default function Pricing(props){
             id: 3,
             title: "Product #3",
             description: "Lorem Ipsum. Product Description #3. Lorem Ipsum",
-            price: "21.99",
+            price: 21.99,
             new : false,
             imgsrc : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/DZ09_smartwatch_with_home_screen_open.jpg/240px-DZ09_smartwatch_with_home_screen_open.jpg"
         }

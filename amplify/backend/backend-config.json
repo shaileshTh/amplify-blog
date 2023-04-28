@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "getPostsFunction"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "createPaymentIntent"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -47,6 +55,11 @@
     }
   },
   "function": {
+    "createPaymentIntent": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getPostsFunction": {
       "build": true,
       "dependsOn": [
@@ -67,7 +80,24 @@
       "service": "Lambda"
     }
   },
+  "interactions": {},
   "parameters": {
+    "AMPLIFY_function_createPaymentIntent_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createPaymentIntent"
+        }
+      ]
+    },
+    "AMPLIFY_function_createPaymentIntent_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createPaymentIntent"
+        }
+      ]
+    },
     "AMPLIFY_function_getPostsFunction_deploymentBucketName": {
       "usedBy": [
         {

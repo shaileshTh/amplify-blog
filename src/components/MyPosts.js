@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import { Alert, Placeholder, Heading, Divider, useTheme } from '@aws-amplify/ui-react';
 import  MyNav  from './MyNav'
 import { Amplify, Auth, API } from 'aws-amplify';
-import { useNavigate } from 'react-router-dom'
 
 
 
@@ -12,7 +11,6 @@ import { useNavigate } from 'react-router-dom'
 export default function MyPosts(props){
     const { tokens } = useTheme();
 
-    const navigate = useNavigate()
     const [loaded, setLoaded] = useState(false);
     const [posts, setPosts] = useState([])
     const [username, setUsername] = useState()

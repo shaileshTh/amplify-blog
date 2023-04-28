@@ -21,6 +21,10 @@
         "getPostsFunction": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
           "s3Key": "amplify-builds/getPostsFunction-70436534744d4466446e-build.zip"
+        },
+        "createPaymentIntent": {
+          "deploymentBucketName": "amplify-poc-dev-113829-deployment",
+          "s3Key": "amplify-builds/createPaymentIntent-4c417a7765514e6f6e64-build.zip"
         }
       },
       "api": {

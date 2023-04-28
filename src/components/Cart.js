@@ -2,9 +2,18 @@ import { useCart } from 'react-use-cart';
 import  MyNav  from './MyNav'
 import { StyleSheet } from 'react-native';
 import { Heading, Divider, Image, Button, View, useTheme, Card, Collection } from '@aws-amplify/ui-react';
+import { useState } from 'react';
 
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+import CheckoutForm from "./CheckoutForm";
+
+const stripePromise = loadStripe("pk_test_51HmobNIOs4Bwoex9HWRfjJt3gFCHUsBNOAMovIwXJfiOFVdFb2ahUfTljChjD2AjyJfk0KsHneueAA3vlP0NR5Hs00X7Q8CI37")
 
 export default function Cart(props) {
+    const { tokens } = useTheme();
+
     const {
       isEmpty,
       items,
@@ -13,8 +22,73 @@ export default function Cart(props) {
       updateItemQuantity,
       removeItem,
     } = useCart();
-    const { tokens } = useTheme();
-  
+    const [clientSecret, setClientSecret] = useState("")
+    const [creatingIntent, setCreatingIntent] = useState(false)
+    
+    async function handleClick(email){
+        setCreatingIntent(true)
+        fetch("https://kwg1iza64l.execute-api.us-east-1.amazonaws.com/dev/create-payment-intent", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({"items" :items,
+                    "email" : email})
+          })
+            .then((res) => res.json())
+            .then((data) => {
+                setClientSecret(data.clientSecret)
+                setCreatingIntent(false)
+            }).
+            catch(err=> console.log(err))
+        }
+     
+    const appearance = {
+        theme: 'stripe',
+    };
+          
+    const options = {
+        clientSecret,
+        appearance,
+    };
+    if (clientSecret) return(
+        <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
+        <MyNav name = {props.name} page = "cart"/>
+          <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
+            <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Total: ${cartTotal.toFixed(2)}</i></Heading>
+            <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
+          </div>
+            <div style = {styles.container}>
+            <Collection
+            style={{marginTop:'30px'}}
+            items = {items}
+            type="list"
+            direction="column"
+            gap="10px"
+            wrap="nowrap"
+            >
+          {(item) => (
+            <Card key={item.id} 
+            borderRadius="medium"
+            maxWidth="33rem"
+            variation="outlined">
+            <View>
+                <Heading level = {6}>{item.quantity} x {item.title} = ${item.itemTotal.toFixed(2)}</Heading>
+                <Heading level = {6}>${item.price} each</Heading>
+              </View>
+            </Card>
+          )}
+        </Collection>
+        <Card
+            style={{padding: '0', marginTop:'20px'}}
+            borderRadius="medium"
+            maxWidth="33rem"
+            variation="outlined">
+                <Elements options={options} stripe={stripePromise}>
+                <CheckoutForm email = {props.email}/>
+                </Elements>
+        </Card>
+        </div>
+        </div>
+    )
     return (
         <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
         <MyNav name = {props.name} page = "cart"/>
@@ -36,36 +110,46 @@ export default function Cart(props) {
           {(item) => (
             <Card key={item.id} 
             borderRadius="medium"
-            maxWidth="30rem"
+            maxWidth="33rem"
             variation="outlined">
             <Image style = {{float:'right'}} src={item.imgsrc} alt={item.title} width="100px"/>
             <View>
                 <Heading level = {5}>{item.title}</Heading>
-                <Heading level = {5}>{item.quantity} x ${item.price}</Heading>
-                <Button variation = "primary" style={styles.button}
+                <Heading level = {5}>${item.itemTotal.toFixed(2)} ({item.quantity} x ${item.price})</Heading>
+                {!clientSecret && <> 
+                    <Button variation = "primary" style={styles.button}
                     onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
-                >
+                    >
                     -
-                </Button>
-                <Button variation = "primary" style={styles.button}
+                    </Button>
+                    <Button variation = "primary" style={styles.button}
                     onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
-                >
+                    >
                     +
-                </Button>
-                <Button variation = "destructive" style={styles.button}
-                onClick={() => removeItem(item.id)}>x</Button>
+                    </Button>
+                    <Button variation = "destructive" style={styles.button}
+                    onClick={() => removeItem(item.id)}>x</Button>
+                </>}
+               
               </View>
             </Card>
           )}
         </Collection>
         <Card borderRadius="medium"
-            maxWidth="30rem"
+            maxWidth="33rem"
             variation="outlined"
-            marginTop="30px">
+            marginTop="30px"
+            marginBottom="30px">
             <Heading level = {5}>Total: {cartTotal.toFixed(2)}</Heading>
+            <br/>
+            
+            <Button isLoading = {creatingIntent} variation = "primary" isFullWidth = {true}
+                 onClick={() => handleClick(props.email)}>Checkout</Button>
+           
         </Card>
         </>}
         </div>
+       
       </div>
     );
   }

@@ -13,6 +13,13 @@
           "delete"
         ]
       }
+    },
+    "/create-payment-intent": {
+      "name": "/create-payment-intent",
+      "lambdaFunction": "createPaymentIntent",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

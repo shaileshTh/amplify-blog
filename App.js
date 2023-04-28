@@ -12,15 +12,18 @@ import Blog from './src/components/Blog';
 import Pricing from './src/components/Pricing';
 import Shop from './src/components/Shop';
 import Cart from './src/components/Cart';
+import PaymentSuccess from './src/components/PaymentSuccess';
 import { CartProvider } from 'react-use-cart';
 
 
 function App(){
   const [name, setName] = useState()
   const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
   Auth.currentAuthenticatedUser().then((u)=>{
     setName(u.attributes.name)
     setUsername(u.attributes.sub)
+    setEmail(u.attributes.email)
   })
   .catch(e => console.log(e))
   
@@ -32,8 +35,9 @@ return(
       <Route path = "/new-post" element = {<NewPost username = {username} name = {name}/>}/>
       <Route path = "/my-posts" element = {<MyPosts name = {name}/>}/>
       <Route path = "/blog" element = {<Blog name = {name}/>}/>
-      <Route path = "/cart" element = {<Cart name = {name}/>}/>
+      <Route path = "/cart" element = {<Cart name = {name} email = {email}/>}/>
       <Route path = "/pricing" element = {<Pricing name = {name}/>}/>
+      <Route path = "/payment-success" element = {<PaymentSuccess name = {name}/>}/>
       <Route path = "/shop" element = {<Shop name = {name}/>}/>
       <Route path = "/" element = {<HomePage name = {name}/>}/>
   </Routes>
