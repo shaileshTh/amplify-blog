@@ -28,11 +28,11 @@
         },
         "stripeWebhook": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
-          "s3Key": "amplify-builds/stripeWebhook-585774584d47794d4d78-build.zip"
+          "s3Key": "amplify-builds/stripeWebhook-74504f636941635a626c-build.zip"
         },
         "createTable": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
-          "s3Key": "amplify-builds/createTable-45735a736e597365456e-build.zip"
+          "s3Key": "amplify-builds/createTable-314b393763396d763173-build.zip"
         }
       },
       "api": {

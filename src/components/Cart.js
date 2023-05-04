@@ -28,7 +28,6 @@ export default function Cart(props) {
     const [creatingIntent, setCreatingIntent] = useState(false)
     useEffect(()=>{
       Auth.currentAuthenticatedUser().then((u)=>{
-          console.log(u.username)
           setUsername(u.username)
       })
     })

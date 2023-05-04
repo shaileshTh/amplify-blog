@@ -2,7 +2,7 @@ import { Amplify, Auth, Hub, API } from 'aws-amplify';
 import awsconfig from './src/aws-exports';
 import "@aws-amplify/ui-react/styles.css";
 import {  BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 Amplify.configure(awsconfig);
 import Login from './src/components/Login'
 import HomePage from './src/components/HomePage'
@@ -30,9 +30,10 @@ function App(){
   Hub.listen('auth', ({ payload }) => {
     const { event } = payload;
     if (event === 'autoSignIn' || event === 'cognitoHostedUI') {
+      let username = payload.data.username.replace(/[-]/g, '')
       API.post("myAPI", "/create-transaction-table", {
         body: {
-          username: payload.data.username
+          username: username
         }
       }).then(r => console.log(r))
     }
