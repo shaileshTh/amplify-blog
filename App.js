@@ -1,4 +1,4 @@
-import { Amplify, Auth } from 'aws-amplify';
+import { Amplify, Auth, Hub, API } from 'aws-amplify';
 import awsconfig from './src/aws-exports';
 import "@aws-amplify/ui-react/styles.css";
 import {  BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -26,6 +26,17 @@ function App(){
     setEmail(u.attributes.email)
   })
   .catch(e => console.log(e))
+
+  Hub.listen('auth', ({ payload }) => {
+    const { event } = payload;
+    if (event === 'autoSignIn' || event === 'cognitoHostedUI') {
+      API.post("myAPI", "/create-transaction-table", {
+        body: {
+          username: payload.data.username
+        }
+      }).then(r => console.log(r))
+    }
+  })
   
 return(
   <CartProvider>

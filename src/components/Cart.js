@@ -1,8 +1,9 @@
 import { useCart } from 'react-use-cart';
 import  MyNav  from './MyNav'
+import { Auth } from 'aws-amplify';
 import { StyleSheet } from 'react-native';
 import { Heading, Divider, Image, Button, View, useTheme, Card, Collection } from '@aws-amplify/ui-react';
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -23,15 +24,21 @@ export default function Cart(props) {
       removeItem,
     } = useCart();
     const [clientSecret, setClientSecret] = useState("")
+    const [username, setUsername] = useState("")
     const [creatingIntent, setCreatingIntent] = useState(false)
-    
+    useEffect(()=>{
+      Auth.currentAuthenticatedUser().then((u)=>{
+          console.log(u.username)
+          setUsername(u.username)
+      })
+    })
     async function handleClick(email){
         setCreatingIntent(true)
         fetch("https://kwg1iza64l.execute-api.us-east-1.amazonaws.com/dev/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({"items" :items,
-                    "email" : email})
+                    "username" : username})
           })
             .then((res) => res.json())
             .then((data) => {

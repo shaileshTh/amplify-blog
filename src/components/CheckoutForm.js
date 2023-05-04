@@ -29,6 +29,8 @@ export default function CheckoutForm(props) {
       return;
     }
 
+    stripe.retrievePaymentIntent(clientSecret).then(data => console.log(data))
+    
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
@@ -64,7 +66,7 @@ export default function CheckoutForm(props) {
         // Make sure to change this to your payment completion page
         return_url: "http://localhost:19006/payment-success",
       },
-    }).then(console.log(elements));
+    });
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to

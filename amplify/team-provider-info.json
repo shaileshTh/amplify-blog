@@ -24,7 +24,15 @@
         },
         "createPaymentIntent": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
-          "s3Key": "amplify-builds/createPaymentIntent-4c417a7765514e6f6e64-build.zip"
+          "s3Key": "amplify-builds/createPaymentIntent-6249626f707a35773666-build.zip"
+        },
+        "stripeWebhook": {
+          "deploymentBucketName": "amplify-poc-dev-113829-deployment",
+          "s3Key": "amplify-builds/stripeWebhook-585774584d47794d4d78-build.zip"
+        },
+        "createTable": {
+          "deploymentBucketName": "amplify-poc-dev-113829-deployment",
+          "s3Key": "amplify-builds/createTable-45735a736e597365456e-build.zip"
         }
       },
       "api": {

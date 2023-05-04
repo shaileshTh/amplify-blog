@@ -17,6 +17,22 @@
           ],
           "category": "function",
           "resourceName": "createPaymentIntent"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "stripeWebhook"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "createTable"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -60,6 +76,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "createTable": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getPostsFunction": {
       "build": true,
       "dependsOn": [
@@ -76,6 +97,11 @@
           "resourceName": "postsDb"
         }
       ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "stripeWebhook": {
+      "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
@@ -98,6 +124,22 @@
         }
       ]
     },
+    "AMPLIFY_function_createTable_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createTable"
+        }
+      ]
+    },
+    "AMPLIFY_function_createTable_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createTable"
+        }
+      ]
+    },
     "AMPLIFY_function_getPostsFunction_deploymentBucketName": {
       "usedBy": [
         {
@@ -111,6 +153,22 @@
         {
           "category": "function",
           "resourceName": "getPostsFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_stripeWebhook_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stripeWebhook"
+        }
+      ]
+    },
+    "AMPLIFY_function_stripeWebhook_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "stripeWebhook"
         }
       ]
     }

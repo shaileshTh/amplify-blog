@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Authenticator } from "@aws-amplify/ui-react"
 import '@aws-amplify/ui-react/styles.css';
-import { StyleSheet } from 'react-native';
-import { Amplify, Auth, Hub } from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
 
 import awsconfig from '../aws-exports';
 import { useNavigate } from 'react-router-dom'
