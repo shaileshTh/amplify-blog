@@ -21,13 +21,6 @@
         "setting": "open"
       }
     },
-    "/stripe-webhook": {
-      "name": "/stripe-webhook",
-      "lambdaFunction": "stripeWebhook",
-      "permissions": {
-        "setting": "open"
-      }
-    },
     "/create-transaction-table": {
       "name": "/create-transaction-table",
       "lambdaFunction": "createTable",

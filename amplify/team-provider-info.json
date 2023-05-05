@@ -26,10 +26,6 @@
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
           "s3Key": "amplify-builds/createPaymentIntent-6249626f707a35773666-build.zip"
         },
-        "stripeWebhook": {
-          "deploymentBucketName": "amplify-poc-dev-113829-deployment",
-          "s3Key": "amplify-builds/stripeWebhook-74504f636941635a626c-build.zip"
-        },
         "createTable": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
           "s3Key": "amplify-builds/createTable-314b393763396d763173-build.zip"

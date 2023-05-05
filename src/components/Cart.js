@@ -31,7 +31,7 @@ export default function Cart(props) {
           setUsername(u.username)
       })
     })
-    async function handleClick(email){
+    async function handleClick(){
         setCreatingIntent(true)
         fetch("https://kwg1iza64l.execute-api.us-east-1.amazonaws.com/dev/create-payment-intent", {
             method: "POST",

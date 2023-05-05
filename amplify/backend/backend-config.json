@@ -24,14 +24,6 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "stripeWebhook"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
           "resourceName": "createTable"
         }
       ],
@@ -99,11 +91,6 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "stripeWebhook": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     }
   },
   "interactions": {},
@@ -153,22 +140,6 @@
         {
           "category": "function",
           "resourceName": "getPostsFunction"
-        }
-      ]
-    },
-    "AMPLIFY_function_stripeWebhook_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "stripeWebhook"
-        }
-      ]
-    },
-    "AMPLIFY_function_stripeWebhook_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "stripeWebhook"
         }
       ]
     }
