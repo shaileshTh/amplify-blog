@@ -1,7 +1,6 @@
 
 var mysql = require('mysql');
 
-
 exports.handler = (event) => {
     var connection = mysql.createConnection({
         host     : 'database-1.chpdtpoawlg2.us-east-1.rds.amazonaws.com',

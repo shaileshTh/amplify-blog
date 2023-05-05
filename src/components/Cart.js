@@ -26,17 +26,27 @@ export default function Cart(props) {
     const [clientSecret, setClientSecret] = useState("")
     const [username, setUsername] = useState("")
     const [creatingIntent, setCreatingIntent] = useState(false)
+   
     useEffect(()=>{
       Auth.currentAuthenticatedUser().then((u)=>{
           setUsername(u.username)
       })
     })
     async function handleClick(){
+      let sanitizedItems = items
+      sanitizedItems = sanitizedItems.map((item) => {
+        delete item.loggedIn
+        delete item.id
+        delete item.description
+        delete item.new
+        delete item.imgsrc
+        return item
+      })
         setCreatingIntent(true)
         fetch("https://kwg1iza64l.execute-api.us-east-1.amazonaws.com/dev/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({"items" :items,
+            body: JSON.stringify({"items" :sanitizedItems,
                     "username" : username})
           })
             .then((res) => res.json())
