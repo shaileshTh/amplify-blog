@@ -2,27 +2,33 @@ import { useEffect, useState } from 'react';
 import { Alert, Placeholder, Heading, Divider, useTheme } from '@aws-amplify/ui-react';
 import  MyNav  from './MyNav'
 import { Amplify, Auth, API } from 'aws-amplify';
-
+import {
+    Table,
+    TableCell,
+    TableBody,
+    TableHead,
+    TableRow,
+  } from '@aws-amplify/ui-react';
 
 
 export default function Transactions(props){
     const { tokens } = useTheme();
-
+    
     const [loaded, setLoaded] = useState(false);
-    const [posts, setPosts] = useState([])
+    const [transcations, setTranscations] = useState([])
     const [username, setUsername] = useState()
     useEffect(()=>{
     Auth.currentAuthenticatedUser().then((u)=>{
-        setUsername(u.attributes.sub)
+        setUsername(u.username)
         if(username){
-            API.get('myAPI', '/get-transactions', {
+            API.post('myAPI', '/get-transactions', {
                 body: {
                     username: username
                 }
             }).then((res)=>{
                 console.log(res)
-                // setPosts(res.data.reverse())
-                // setLoaded(true)
+                setTranscations(res.reverse())
+                setLoaded(true)
             }).catch(err => console.log(err))
         }
       })
@@ -45,8 +51,38 @@ export default function Transactions(props){
             <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
           </div>
           
-        {loaded ? <>
-            <h1>transactions</h1></> :<div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
+        {loaded ?
+        <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto', backgroundColor:'var(--amplify-colors-background-primary)'}}>
+        <Table
+            highlightOnHover={true}>
+            <TableHead>
+                <TableRow>
+                <TableCell as="th">Payment ID</TableCell>
+                <TableCell as="th">Total</TableCell>
+                <TableCell as="th">Timestamp</TableCell>
+                <TableCell as="th">Items</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {transcations.map((t) => {
+                    let items = JSON.parse(t.stringifiedItems)
+                    let itemsDisplay = ""
+                    items.map((item) => {
+                        itemsDisplay += item.quantity + " x " + item.title + " ($"+item.itemTotal + ") • "
+                    })
+                    return (
+                        <TableRow>
+                        <TableCell>{t.pId}</TableCell>
+                        <TableCell>${t.amountInCents/100}</TableCell>
+                        <TableCell>{t.timestamp.substring(0,34)}</TableCell>
+                        <TableCell>{itemsDisplay}</TableCell>
+                        </TableRow>
+                    )
+                })}
+            </TableBody>
+        </Table> 
+        </div>
+    :<div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
                 <Placeholder/>
                 <br/>
                 <Placeholder/>

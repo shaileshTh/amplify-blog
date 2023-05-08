@@ -47,7 +47,7 @@ return(
       <Route path = "/login" element = {<Login/>}/>
       <Route path = "/new-post" element = {<NewPost username = {username} name = {name}/>}/>
       <Route path = "/my-posts" element = {<MyPosts name = {name}/>}/>
-      <Route path = "/my-transactions" element = {<Transactions name = {name} username = {username}/>}/>
+      <Route path = "/my-transactions" element = {<Transactions name = {name}/>}/>
       <Route path = "/blog" element = {<Blog name = {name}/>}/>
       <Route path = "/cart" element = {<Cart name = {name} email = {email}/>}/>
       <Route path = "/pricing" element = {<Pricing name = {name}/>}/>
