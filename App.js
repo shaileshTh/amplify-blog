@@ -12,6 +12,7 @@ import Blog from './src/components/Blog';
 import Pricing from './src/components/Pricing';
 import Shop from './src/components/Shop';
 import Cart from './src/components/Cart';
+import Transactions from './src/components/Transactions';
 import PaymentSuccess from './src/components/PaymentSuccess';
 import { CartProvider } from 'react-use-cart';
 
@@ -46,6 +47,7 @@ return(
       <Route path = "/login" element = {<Login/>}/>
       <Route path = "/new-post" element = {<NewPost username = {username} name = {name}/>}/>
       <Route path = "/my-posts" element = {<MyPosts name = {name}/>}/>
+      <Route path = "/my-transactions" element = {<Transactions name = {name} username = {username}/>}/>
       <Route path = "/blog" element = {<Blog name = {name}/>}/>
       <Route path = "/cart" element = {<Cart name = {name} email = {email}/>}/>
       <Route path = "/pricing" element = {<Pricing name = {name}/>}/>

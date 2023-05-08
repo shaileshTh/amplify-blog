@@ -25,6 +25,14 @@
           ],
           "category": "function",
           "resourceName": "createTable"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "getTransactions"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -91,6 +99,11 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "getTransactions": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "interactions": {},
@@ -140,6 +153,22 @@
         {
           "category": "function",
           "resourceName": "getPostsFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_getTransactions_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getTransactions"
+        }
+      ]
+    },
+    "AMPLIFY_function_getTransactions_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getTransactions"
         }
       ]
     }

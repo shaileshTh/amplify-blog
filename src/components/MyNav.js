@@ -55,6 +55,11 @@ export default function MyNav(props){
                         New Post
                     </Button> 
                 </Link>}
+                {(props.name && props.page != 'my-transactions') && <Link to = "/my-transactions" style = {{textDecorationLine:'none'}}>
+                    <Button variation = "link" style = {styles.button}>
+                        Transactions
+                    </Button> 
+                </Link>}
                 {(props.name && props.page != 'my-posts') && <Link to = "/my-posts" style = {{textDecorationLine:'none'}}>
                     <Button variation = "link" style = {styles.button}>
                         My Posts

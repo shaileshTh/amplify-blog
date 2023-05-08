@@ -27,6 +27,19 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/get-transactions": {
+      "name": "/get-transactions",
+      "lambdaFunction": "getTransactions",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
     }
   }
 }
