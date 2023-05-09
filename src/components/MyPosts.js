@@ -23,8 +23,8 @@ export default function MyPosts(props){
                     username: username
                 }
             }).then((res)=>{
-                // console.log(res)
-                setPosts(res.data.reverse())
+                res.data.sort((a,b) => (new Date(b.createdAt) - new Date(a.createdAt)))
+                setPosts(res.data)
                 setLoaded(true)
             }).catch(err => console.log(err))
         }
@@ -46,11 +46,6 @@ export default function MyPosts(props){
             style = {{fontSize:'x-large', maxWidth: '1200px', margin: '30px auto'}}>
               Please login to view your posts
           </Alert> : <>
-        {/* <Alert variation='info' 
-            hasIcon = {false}
-            style = {{fontSize:'x-large', maxWidth: '1200px', margin: '30px auto'}}>
-              Your Posts
-          </Alert> */}
           <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
             <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Your Posts</i></Heading>
             <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
