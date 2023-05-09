@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { Auth } from 'aws-amplify';
 import { useCart } from "react-use-cart"
 import { Menu, MenuItem, MenuButton } from '@aws-amplify/ui-react';
+import { useEffect, useState } from 'react';
 
 async function signOut() {
   try {
@@ -19,7 +20,14 @@ async function signOut() {
 
 export default function MyNav(props){
     const { totalItems } = useCart()
-    console.log(screen.width)
+    const [widthMatch, setWidthMath] = useState(
+        window.matchMedia("(max-width: 550px)").matches
+    )
+
+    useEffect(() => {
+        window.matchMedia("(max-width: 550px)")
+        .addEventListener('change', e => setWidthMath(e.matches))
+    })
     return(
         <View
         as="div"
@@ -54,7 +62,27 @@ export default function MyNav(props){
                     </Button> 
                 </Link>}</>
                 }
-                
+            {widthMatch ?
+            <div style = {{float:'right', marginRight: '10px'}}>
+            <Menu>
+                <MenuItem>
+                    <Link to = "/pricing" style = {{textDecorationLine:'none', width:'100%'}}>
+                        Pricing
+                    </Link>
+                </MenuItem>
+                <MenuItem>
+                    <Link to = "/shop" style = {{textDecorationLine:'none', width:'100%'}}>
+                        Shop
+                    </Link>
+                </MenuItem>
+                <MenuItem>
+                    <Link to = "/blog" style = {{textDecorationLine:'none', width:'100%'}}>
+                        Blog
+                    </Link>
+                </MenuItem>
+            </Menu>
+            </div>
+            : <>
                 {props.page != 'blog' &&<Link to = "/blog">
                     <Button variation = "link" style = {styles.button}>
                         Blog
@@ -70,6 +98,7 @@ export default function MyNav(props){
                         Pricing
                     </Button> 
                 </Link>}
+                </>}
                 
         </div>
            
@@ -83,8 +112,6 @@ const styles = StyleSheet.create({
         boxShadow:" 0px 5px 5px gray",
         height:"5rem",
         padding:"1.5rem",
-        paddingLeft: "0",
-        paddingRight: "0",
         backgroundColor: "var(--amplify-colors-background-secondary)",
         position:"relative",
         zIndex:"999"

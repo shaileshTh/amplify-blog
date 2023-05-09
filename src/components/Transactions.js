@@ -26,7 +26,6 @@ export default function Transactions(props){
                     username: username
                 }
             }).then((res)=>{
-                console.log(res)
                 setTranscations(res.reverse())
                 setLoaded(true)
             }).catch(err => console.log(err))
