@@ -67,7 +67,7 @@ export default function Transactions(props){
                     let items = JSON.parse(t.stringifiedItems)
                     let itemsDisplay = ""
                     items.map((item) => {
-                        itemsDisplay += item.quantity + " x " + item.title + " ($"+item.itemTotal + ") • "
+                        itemsDisplay += item.quantity + " x " + item.title + " ($"+item.itemTotal.toFixed(2) + ") • "
                     })
                     return (
                         <TableRow>
