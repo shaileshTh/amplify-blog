@@ -12,7 +12,7 @@ exports.handler = async (event) => {
     });
     
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: parseFloat(total.toFixed(2)) * 100,
+        amount: parseFloat((total*100).toFixed(2)),
         currency: "usd",
         receipt_email: data.email,
         metadata: {

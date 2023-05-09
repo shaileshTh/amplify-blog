@@ -24,7 +24,7 @@
         },
         "createPaymentIntent": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
-          "s3Key": "amplify-builds/createPaymentIntent-6249626f707a35773666-build.zip"
+          "s3Key": "amplify-builds/createPaymentIntent-5a32536d712b2b796d4e-build.zip"
         },
         "createTable": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
