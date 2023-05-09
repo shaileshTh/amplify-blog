@@ -12,7 +12,7 @@ export default function Blog(props){
       fetch('https://9pspcidrie.execute-api.us-east-1.amazonaws.com/dev/get-all-posts')
       .then(res => res.json())
       .then((data) => {
-            setPosts(data.reverse())
+            setPosts(data)
             setLoaded(true)
         })
       .catch(err => console.log(err))
