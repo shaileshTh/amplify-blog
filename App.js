@@ -15,6 +15,8 @@ import Cart from './src/components/Cart';
 import Transactions from './src/components/Transactions';
 import PaymentSuccess from './src/components/PaymentSuccess';
 import { CartProvider } from 'react-use-cart';
+import { Helmet } from 'react-helmet';
+import Subscription from './src/components/Subscription';
 
 
 function App(){
@@ -42,9 +44,13 @@ function App(){
   
 return(
   <CartProvider>
+    <Helmet>
+      <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+    </Helmet>
   <Router>
   <Routes>
       <Route path = "/login" element = {<Login/>}/>
+      <Route path = "/subscription" element = {<Subscription username = {username} name = {name}/>}/>
       <Route path = "/new-post" element = {<NewPost username = {username} name = {name}/>}/>
       <Route path = "/my-posts" element = {<MyPosts name = {name}/>}/>
       <Route path = "/my-transactions" element = {<Transactions name = {name}/>}/>

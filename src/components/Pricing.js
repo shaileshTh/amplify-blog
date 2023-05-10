@@ -11,6 +11,7 @@ export default function Pricing(props){
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
         <MyNav page = 'pricing' name = {props.name}/>
         <div style = {styles.container}>
+    
             <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
                 <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Pricing</i></Heading>
                 <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
