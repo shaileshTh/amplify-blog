@@ -1,9 +1,9 @@
 let mysql = require('mysql')
 let pool = mysql.createPool({
-    host     : 'database-1.chpdtpoawlg2.us-east-1.rds.amazonaws.com',
-    user     : 'admin',
-    password : 'aaaaaaaa',
-    database : 'Transactions_DB',
+    host     : process.env['host'],
+    user     : process.env['user'],
+    password : process.env['password'],
+    database : process.env['database'],
 });
 
 

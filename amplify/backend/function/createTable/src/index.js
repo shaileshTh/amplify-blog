@@ -3,10 +3,10 @@ var mysql = require('mysql');
 
 exports.handler = (event) => {
     var connection = mysql.createConnection({
-        host     : 'database-1.chpdtpoawlg2.us-east-1.rds.amazonaws.com',
-        user     : 'admin',
-        password : 'aaaaaaaa',
-        database : 'Transactions_DB',
+        host     : process.env['host'],
+        user     : process.env['user'],
+        password : process.env['password'],
+        database : process.env['database'],
     });
 
     const data =  JSON.parse(event.body)

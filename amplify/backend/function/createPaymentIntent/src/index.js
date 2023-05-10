@@ -1,10 +1,7 @@
-
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
-const stripe = require("stripe")('sk_test_51HmobNIOs4Bwoex9erX63uEPKdwylY7a5f8zxvmskceNETVfJMaDzygagiugpV5xocQFVVjJEvHhslTdlHdExUs500dSOPhSrx');
+const stripe = require("stripe")(process.env['stripe_sk_test']);
 
 exports.handler = async (event) => {
+
     let total = 0;
     const data =  JSON.parse(event.body)
     data.items.map(item => {
