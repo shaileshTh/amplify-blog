@@ -50,7 +50,7 @@ return(
   <Router>
   <Routes>
       <Route path = "/login" element = {<Login/>}/>
-      <Route path = "/subscription" element = {<Subscription username = {username} name = {name}/>}/>
+      <Route path = "/subscription" element = {<Subscription email = {email} username = {username} name = {name}/>}/>
       <Route path = "/new-post" element = {<NewPost username = {username} name = {name}/>}/>
       <Route path = "/my-posts" element = {<MyPosts name = {name}/>}/>
       <Route path = "/my-transactions" element = {<Transactions name = {name}/>}/>

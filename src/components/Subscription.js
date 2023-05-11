@@ -19,6 +19,7 @@ export default function Subscription(props){
               Please login to access the subscription page
             </Alert> :   <stripe-pricing-table 
             pricing-table-id="prctbl_1N6I7MIOs4Bwoex9um96LPkA" 
+            customer-email = {props.email}
             publishable-key="pk_test_51HmobNIOs4Bwoex9HWRfjJt3gFCHUsBNOAMovIwXJfiOFVdFb2ahUfTljChjD2AjyJfk0KsHneueAA3vlP0NR5Hs00X7Q8CI37"></stripe-pricing-table>
             }
           
