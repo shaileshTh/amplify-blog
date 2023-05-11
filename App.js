@@ -25,7 +25,7 @@ function App(){
   const [email, setEmail] = useState()
   Auth.currentAuthenticatedUser().then((u)=>{
     setName(u.attributes.name)
-    setUsername(u.attributes.sub)
+    setUsername(u.username)
     setEmail(u.attributes.email)
   })
   .catch(e => console.log(e))
