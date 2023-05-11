@@ -12,10 +12,10 @@ exports.handler = (event) => {
     const data =  JSON.parse(event.body)
     let username = "t_" + data.username
     
-    //create table named by email
+    //create table named by username
     let concatQuery = 'CREATE TABLE IF NOT EXISTS ' + username
     let createQuery = mysql
-    .format(concatQuery + ' (pId VARCHAR(255) PRIMARY KEY, amountInCents INT, stringifiedItems TEXT, timestamp VARCHAR(255))'
+    .format(concatQuery + ' (pId VARCHAR(255) PRIMARY KEY, amountInCents INT, stringifiedItems TEXT, timestamp VARCHAR(255), isSubscription BOOLEAN)'
     , [username])
     connection.connect(function(err, callback){
         connection.query(createQuery, function (err, callback){
