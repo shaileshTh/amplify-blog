@@ -33,6 +33,14 @@
           ],
           "category": "function",
           "resourceName": "getTransactions"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "getSubscription"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -100,6 +108,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "getSubscription": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getTransactions": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -153,6 +166,22 @@
         {
           "category": "function",
           "resourceName": "getPostsFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_getSubscription_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getSubscription"
+        }
+      ]
+    },
+    "AMPLIFY_function_getSubscription_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getSubscription"
         }
       ]
     },

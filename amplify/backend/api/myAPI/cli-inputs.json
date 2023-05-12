@@ -40,6 +40,19 @@
           "delete"
         ]
       }
+    },
+    "/get-subscription-status": {
+      "name": "/get-subscription-status",
+      "lambdaFunction": "getSubscription",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
     }
   }
 }

@@ -33,6 +33,10 @@
         "getTransactions": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
           "s3Key": "amplify-builds/getTransactions-447033716f5133687234-build.zip"
+        },
+        "getSubscription": {
+          "deploymentBucketName": "amplify-poc-dev-113829-deployment",
+          "s3Key": "amplify-builds/getSubscription-6a4f61762f4670456552-build.zip"
         }
       },
       "api": {
