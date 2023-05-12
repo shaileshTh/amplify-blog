@@ -1,8 +1,8 @@
 
 var mysql = require('mysql');
 
-exports.handler = (event) => {
-    var connection = mysql.createConnection({
+exports.handler = async (event) => {
+    var pool = mysql.createConnection({
         host     : process.env['host'],
         user     : process.env['user'],
         password : process.env['password'],
@@ -11,21 +11,23 @@ exports.handler = (event) => {
 
     const data =  JSON.parse(event.body)
     let username = "t_" + data.username
-    
+    let response;
     //create table named by username
-    let concatQuery = 'CREATE TABLE IF NOT EXISTS ' + username
-    let createQuery = mysql
-    .format(concatQuery + ' (pId VARCHAR(255) PRIMARY KEY, amountInCents INT, stringifiedItems TEXT, timestamp VARCHAR(255), isSubscription BOOLEAN)'
-    , [username])
-    connection.connect(function(err, callback){
-        connection.query(createQuery, function (err, callback){
-            connection.end();
+    await new Promise(function (resolve, reject) {
+        let concatQuery = 'CREATE TABLE IF NOT EXISTS ' + username
+        let createQuery = mysql
+        .format(concatQuery + ' (pId VARCHAR(255) PRIMARY KEY, amountInCents INT, stringifiedItems TEXT, timestamp VARCHAR(255), isSubscription BOOLEAN)'
+        , [username])
+        pool.query(createQuery, function (err, result){
+            if(err) reject(Error(err))
+            response = result;
+            resolve(response)
         })
     });
 
 
     return {
         statusCode: 200,
-        body: JSON.stringify('query done'),
+        body: JSON.stringify(response),
     };
 };

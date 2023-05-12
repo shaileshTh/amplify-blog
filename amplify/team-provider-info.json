@@ -28,7 +28,7 @@
         },
         "createTable": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
-          "s3Key": "amplify-builds/createTable-6b5763672b4e56327a31-build.zip"
+          "s3Key": "amplify-builds/createTable-32516c50316a7a6f3147-build.zip"
         },
         "getTransactions": {
           "deploymentBucketName": "amplify-poc-dev-113829-deployment",
