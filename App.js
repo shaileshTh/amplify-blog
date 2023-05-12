@@ -23,10 +23,20 @@ function App(){
   const [name, setName] = useState()
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
+  const [stripeCustomerId, setStripeCustomerId] = useState()
+  
   Auth.currentAuthenticatedUser().then((u)=>{
     setName(u.attributes.name)
     setUsername(u.username)
     setEmail(u.attributes.email)
+
+    API.post("myAPI", "/get-subscription-status", {
+      body: {
+        username: u.username
+      }
+    }).then((r) => {
+      setStripeCustomerId(r[0].stringifiedItems)
+    })
   })
   .catch(e => console.log(e))
 
@@ -40,11 +50,6 @@ function App(){
         }
       }).then(r => console.log(r))
 
-      API.post("myAPI", "/get-subscription-status", {
-        body: {
-          username: username
-        }
-      }).then(r => console.log(r))
     }
   })
   
@@ -56,16 +61,16 @@ return(
   <Router>
   <Routes>
       <Route path = "/login" element = {<Login/>}/>
-      <Route path = "/subscription" element = {<Subscription email = {email} username = {username} name = {name}/>}/>
-      <Route path = "/new-post" element = {<NewPost username = {username} name = {name}/>}/>
-      <Route path = "/my-posts" element = {<MyPosts name = {name}/>}/>
-      <Route path = "/my-transactions" element = {<Transactions name = {name}/>}/>
-      <Route path = "/blog" element = {<Blog name = {name}/>}/>
-      <Route path = "/cart" element = {<Cart name = {name} email = {email}/>}/>
-      <Route path = "/pricing" element = {<Pricing name = {name}/>}/>
-      <Route path = "/payment-success" element = {<PaymentSuccess name = {name}/>}/>
-      <Route path = "/shop" element = {<Shop name = {name}/>}/>
-      <Route path = "/" element = {<HomePage name = {name}/>}/>
+      <Route path = "/subscription" element = {<Subscription customerId = {stripeCustomerId} email = {email} username = {username} name = {name}/>}/>
+      <Route path = "/new-post" element = {<NewPost customerId = {stripeCustomerId} username = {username} name = {name}/>}/>
+      <Route path = "/my-posts" element = {<MyPosts customerId = {stripeCustomerId} name = {name}/>}/>
+      <Route path = "/my-transactions" element = {<Transactions customerId = {stripeCustomerId} name = {name}/>}/>
+      <Route path = "/blog" element = {<Blog customerId = {stripeCustomerId} name = {name}/>}/>
+      <Route path = "/cart" element = {<Cart customerId = {stripeCustomerId} name = {name} email = {email}/>}/>
+      <Route path = "/pricing" element = {<Pricing customerId = {stripeCustomerId} name = {name}/>}/>
+      <Route path = "/payment-success" element = {<PaymentSuccess customerId = {stripeCustomerId} name = {name}/>}/>
+      <Route path = "/shop" element = {<Shop customerId = {stripeCustomerId} name = {name}/>}/>
+      <Route path = "/" element = {<HomePage customerId = {stripeCustomerId} name = {name}/>}/>
   </Routes>
   </Router>
   </CartProvider>

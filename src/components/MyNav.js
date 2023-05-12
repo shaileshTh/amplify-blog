@@ -1,4 +1,4 @@
-import { View, Text, Button } from '@aws-amplify/ui-react'
+import { View, Text, Button, Badge } from '@aws-amplify/ui-react'
 import { StyleSheet } from 'react-native';
 import '@aws-amplify/ui-react/styles.css';
 import { Link } from 'react-router-dom'
@@ -6,6 +6,7 @@ import { Auth } from 'aws-amplify';
 import { useCart } from "react-use-cart"
 import { Menu, MenuItem, MenuButton } from '@aws-amplify/ui-react';
 import { useEffect, useState } from 'react';
+const stripe = require('stripe')('sk_test_51HmobNIOs4Bwoex9erX63uEPKdwylY7a5f8zxvmskceNETVfJMaDzygagiugpV5xocQFVVjJEvHhslTdlHdExUs500dSOPhSrx');
 
 async function signOut() {
   try {
@@ -20,6 +21,7 @@ async function signOut() {
 
 export default function MyNav(props){
     const { totalItems } = useCart()
+    const [subscriptionActive, setSubscriptionActive] = useState(false)
     const [widthMatch, setWidthMath] = useState(
         window.matchMedia("(max-width: 550px)").matches
     )
@@ -27,6 +29,16 @@ export default function MyNav(props){
     useEffect(() => {
         window.matchMedia("(max-width: 550px)")
         .addEventListener('change', e => setWidthMath(e.matches))
+
+        const subscriptions = stripe.subscriptions.list({
+            customer: props.customerId
+        });
+
+        subscriptions.then((r) => {
+            console.log(r.data[0].plan)
+            setSubscriptionActive(r.data[0].plan.active)
+            // stripe.products.retrieve(r.data[0].stringifiedItems).then(r => console.log(r))
+        })
     })
     return(
         <View
@@ -46,7 +58,9 @@ export default function MyNav(props){
                     <Menu 
                     trigger={
                         <MenuButton style={{float:'right'}} variation="primary">
-                            👤 {props.name}
+                            👤 {props.name}  
+                            {subscriptionActive ? <Badge marginLeft = "5px" size = "small" variation="success">Subscribed</Badge>
+                            : <Badge marginLeft = "5px" size = "small" variation="info">Not Subscribed</Badge>}
                         </MenuButton>
                     }
                     >
