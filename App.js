@@ -39,6 +39,12 @@ function App(){
           username: username
         }
       }).then(r => console.log(r))
+
+      API.post("myAPI", "/get-subscription-status", {
+        body: {
+          username: username
+        }
+      }).then(r => console.log(r))
     }
   })
   
