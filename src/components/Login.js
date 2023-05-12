@@ -23,22 +23,12 @@ const navigate = useNavigate()
     
         <Authenticator socialProviders={['google']}>
           {() => (
-            navigate("/my-posts")
+            <h1>logged in</h1>
+            // navigate("/my-posts")
           )}
         </Authenticator>
       </div>
     )
-
-    async function signIn(e) {
-        e.preventDefault()
-        console.log(email)
-        try {
-          const user = await Auth.signIn(email, password);
-          Auth.currentAuthenticatedUser().then(navigate("/my-posts"))
-        } catch (error) {
-          console.log('error signing in', error);
-        }
-    }
 }
 
 

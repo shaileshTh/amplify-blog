@@ -29,7 +29,6 @@ function App(){
     setName(u.attributes.name)
     setUsername(u.username)
     setEmail(u.attributes.email)
-
     API.post("myAPI", "/get-subscription-status", {
       body: {
         username: u.username
@@ -42,7 +41,7 @@ function App(){
 
   Hub.listen('auth', ({ payload }) => {
     const { event } = payload;
-    if (event === 'autoSignIn' || event === 'cognitoHostedUI') {
+    if (event === 'cognitoHostedUI' || event === 'autoSignIn') {
       let username = payload.data.username.replace(/[-]/g, '')
       API.post("myAPI", "/create-transaction-table", {
         body: {
