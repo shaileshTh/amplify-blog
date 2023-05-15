@@ -34,7 +34,7 @@ function App(){
         username: u.username
       }
     }).then((r) => {
-      setStripeCustomerId(r[0].stringifiedItems)
+      if(r.length != 0) setStripeCustomerId(r[0].stringifiedItems)
     })
   })
   .catch(e => console.log(e))

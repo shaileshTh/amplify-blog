@@ -29,16 +29,17 @@ export default function MyNav(props){
     useEffect(() => {
         window.matchMedia("(max-width: 550px)")
         .addEventListener('change', e => setWidthMath(e.matches))
-
-        const subscriptions = stripe.subscriptions.list({
-            customer: props.customerId
-        });
-
-        subscriptions.then((r) => {
-            console.log(r.data[0].plan)
-            setSubscriptionActive(r.data[0].plan.active)
-            // stripe.products.retrieve(r.data[0].stringifiedItems).then(r => console.log(r))
-        })
+        if(props.customerId){
+            const subscriptions = stripe.subscriptions.list({
+                customer: props.customerId
+            });
+    
+            subscriptions.then((r) => {
+                console.log(r.data[0].plan)
+                setSubscriptionActive(r.data[0].plan.active)
+            })
+        }
+       
     })
     return(
         <View
