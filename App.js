@@ -17,6 +17,7 @@ import PaymentSuccess from './src/components/PaymentSuccess';
 import { CartProvider } from 'react-use-cart';
 import { Helmet } from 'react-helmet';
 import Subscription from './src/components/Subscription';
+import MySubscription from './src/components/MySubscription';
 
 
 function App(){
@@ -61,6 +62,7 @@ return(
   <Routes>
       <Route path = "/login" element = {<Login/>}/>
       <Route path = "/subscription" element = {<Subscription customerId = {stripeCustomerId} email = {email} username = {username} name = {name}/>}/>
+      <Route path = "/my-subscription" element = {<MySubscription customerId = {stripeCustomerId} email = {email} username = {username} name = {name}/>}/>
       <Route path = "/new-post" element = {<NewPost customerId = {stripeCustomerId} username = {username} name = {name}/>}/>
       <Route path = "/my-posts" element = {<MyPosts customerId = {stripeCustomerId} name = {name}/>}/>
       <Route path = "/my-transactions" element = {<Transactions customerId = {stripeCustomerId} name = {name}/>}/>

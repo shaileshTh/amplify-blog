@@ -35,7 +35,6 @@ export default function MyNav(props){
             });
     
             subscriptions.then((r) => {
-                console.log(r.data[0].plan)
                 setSubscriptionActive(r.data[0].plan.active)
             })
         }
@@ -67,6 +66,7 @@ export default function MyNav(props){
                     >
                         <MenuItem><Link to = "/subscription" style = {{textDecorationLine:'none', width:'100%'}}>Subscription</Link></MenuItem>
                         <MenuItem><Link to = "/my-posts" style = {{textDecorationLine:'none', width:'100%'}}>My Posts</Link></MenuItem>
+                        {subscriptionActive && <MenuItem><Link to = "/my-subscription" style = {{textDecorationLine:'none', width:'100%'}}>My Subscription</Link></MenuItem>}
                         <MenuItem> <Link to = "/my-transactions" style = {{textDecorationLine:'none', width:'100%'}}>Transactions</Link></MenuItem>
                         <MenuItem><Link to = "/new-post" style = {{textDecorationLine:'none', width:'100%'}}>New Post</Link></MenuItem>
                         <MenuItem><Link to = "/cart" style = {{textDecorationLine:'none', width:'100%'}}>Cart({totalItems})</Link></MenuItem>
