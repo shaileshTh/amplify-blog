@@ -7,7 +7,7 @@ import { Heading, Divider, useTheme, Alert } from '@aws-amplify/ui-react';
 export default function Subscription(props){
     const { tokens } = useTheme();
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav page = 'subscription' name = {props.name}/>
+        <MyNav customerId = {props.customerId} page = 'subscription' name = {props.name}/>
         <div style = {styles.container}>
             <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
                 <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Subscription</i></Heading>

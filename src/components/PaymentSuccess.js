@@ -14,7 +14,7 @@ export default function PaymentSuccess(props){
     emptyCart();
   
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav name = {props.name}/>
+        <MyNav customerId = {props.customerId} name = {props.name}/>
           <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
             <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Success</i></Heading>
             <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>

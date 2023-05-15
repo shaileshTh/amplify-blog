@@ -10,7 +10,7 @@ export default function Pricing(props){
     const { tokens } = useTheme();
 
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav page = 'pricing' name = {props.name}/>
+        <MyNav customerId = {props.customerId} page = 'pricing' name = {props.name}/>
         <div style = {styles.container}>
     
             <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>

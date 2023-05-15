@@ -17,7 +17,7 @@ export default function NewPost(props){
 
     return(
         <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-          <MyNav name = {props.name} page = "new-post"/>
+          <MyNav customerId = {props.customerId} name = {props.name} page = "new-post"/>
           <div style = {{maxWidth:'1200px', margin:'30px auto 0 auto'}}>
             <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>New Post</i></Heading>
             <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>

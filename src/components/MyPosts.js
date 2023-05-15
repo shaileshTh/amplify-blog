@@ -40,7 +40,7 @@ export default function MyPosts(props){
     
 
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav name = {props.name} page = "my-posts"/>
+        <MyNav customerId = {props.customerId} name = {props.name} page = "my-posts"/>
 
         {props.name === undefined ? <Alert variation='warning' 
             style = {{fontSize:'x-large', maxWidth: '1200px', margin: '30px auto'}}>
