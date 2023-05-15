@@ -10,7 +10,7 @@ let pool = mysql.createPool({
 exports.handler = async (event) => {
     const data =  JSON.parse(event.body)
     let table = "t_" + data.username.replace(/[-]/g, '')
-    let query = "SELECT * FROM " + table
+    let query = "SELECT * FROM  "+ table + " where isSubscription = 0"
     let response;
     await new Promise(function (resolve, reject) {
         
