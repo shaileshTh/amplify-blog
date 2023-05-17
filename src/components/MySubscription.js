@@ -55,7 +55,7 @@ export default function MySubscription(props){
                <button onClick = {() => {
                     stripe.billingPortal.sessions.create({
                         customer: props.customerId
-                    }).then(r => console.log(r.url))
+                    }).then(r => window.open(r.url))
                 }}>Manage Billing</button>
             </>
             }
