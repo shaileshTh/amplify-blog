@@ -5,7 +5,7 @@ import { Amplify } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 import { useNavigate } from 'react-router-dom'
 Amplify.configure(awsconfig);
-import  MyNav  from './MyNav'
+import  MyNav  from '../components/MyNav'
 
 
 

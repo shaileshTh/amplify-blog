@@ -1,14 +1,15 @@
 import { useCart } from 'react-use-cart';
-import  MyNav  from './MyNav'
+import  MyNav  from '../components/MyNav'
+import  MyHeading  from '../components/MyHeading'
 import { Auth } from 'aws-amplify';
 import { StyleSheet } from 'react-native';
-import { Heading, Divider, Image, Button, View, useTheme, Card, Collection } from '@aws-amplify/ui-react';
+import { Heading, Image, Button, View, useTheme, Card, Collection } from '@aws-amplify/ui-react';
 import { useState, useEffect} from 'react';
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-import CheckoutForm from "./CheckoutForm";
+import CheckoutForm from "../components/CheckoutForm";
 
 const stripePromise = loadStripe("pk_test_51HmobNIOs4Bwoex9HWRfjJt3gFCHUsBNOAMovIwXJfiOFVdFb2ahUfTljChjD2AjyJfk0KsHneueAA3vlP0NR5Hs00X7Q8CI37")
 
@@ -68,10 +69,10 @@ export default function Cart(props) {
     if (clientSecret) return(
         <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
         <MyNav name = {props.name} page = "cart"/>
-          <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
-            <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Total: ${cartTotal.toFixed(2)}</i></Heading>
-            <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
-          </div>
+        
+          <MyHeading title = {"Total: $" + cartTotal.toFixed(2)}/>
+
+      
             <div style = {styles.container}>
             <Collection
             style={{marginTop:'30px'}}
@@ -108,10 +109,8 @@ export default function Cart(props) {
     return (
         <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
         <MyNav customerId = {props.customerId} name = {props.name} page = "cart"/>
-          <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
-            <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Cart ({totalItems})</i></Heading>
-            <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
-          </div>
+        
+        <MyHeading title = {"Cart (" + totalItems + ")"}/>
         
         <div style = {styles.container}>
         {isEmpty ? <h2>Cart is Empty</h2> : <>

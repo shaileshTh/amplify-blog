@@ -1,6 +1,7 @@
-import MyNav from "./MyNav";
+import MyNav from "../components/MyNav";
+import MyHeading from "../components/MyHeading";
 import { StyleSheet } from 'react-native';
-import { Heading, Divider, useTheme, Alert } from '@aws-amplify/ui-react';
+import { useTheme, Alert } from '@aws-amplify/ui-react';
 
 
 
@@ -9,10 +10,7 @@ export default function Subscription(props){
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
         <MyNav customerId = {props.customerId} page = 'subscription' name = {props.name}/>
         <div style = {styles.container}>
-            <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
-                <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Subscription</i></Heading>
-                <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
-            </div>
+            <MyHeading title = "Subscription" />
             {props.name === undefined ? <Alert variation='warning' 
             style = {{fontSize:'x-large', maxWidth: '1200px', margin: '30px auto'}}>
               Please login to access the subscription page

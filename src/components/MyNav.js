@@ -30,16 +30,18 @@ export default function MyNav(props){
         window.matchMedia("(max-width: 550px)")
         .addEventListener('change', e => setWidthMath(e.matches))
         if(props.customerId){
-            const subscriptions = stripe.subscriptions.list({
-                customer: props.customerId
-            });
-    
-            subscriptions.then((r) => {
-                setSubscriptionActive(r.data[0].plan.active)
-            })
+            if(props.customerId != "not found"){
+                const subscriptions = stripe.subscriptions.list({
+                    customer: props.customerId
+                });
+        
+                subscriptions.then((r) => {
+                    setSubscriptionActive(r.data[0].plan.active)
+                })
+            }
         }
-       
     })
+
     return(
         <View
         as="div"
@@ -59,10 +61,23 @@ export default function MyNav(props){
                     trigger={
                         <MenuButton style={{float:'right'}} variation="primary">
                             👤 {props.name}  
-                            {subscriptionActive ? <Badge marginLeft = "5px" size = "small" variation="success">Subscribed</Badge>
-                            : <Badge marginLeft = "5px" size = "small" variation="info">Not Subscribed</Badge>}
-                        </MenuButton>
-                    }
+                            {props.customerId ?
+                                <>
+                                    {props.customerId === "Error" ? 
+                                        <Badge marginLeft = "5px" size = "small" variation="error">Error loading status</Badge>
+                                        : 
+                                        <>
+                                            {subscriptionActive ? 
+                                                <Badge marginLeft = "5px" size = "small" variation="success">Subscribed</Badge>
+                                                : <Badge marginLeft = "5px" size = "small" variation="info">Not Subscribed</Badge>
+                                            }
+                                        </> }
+                                </> 
+                                : 
+                                <Badge marginLeft = "5px" size = "small" variation="info">Loading status...</Badge>
+                            }
+                                
+                        </MenuButton>}
                     >
                         {!subscriptionActive && <MenuItem><Link to = "/subscription" style = {{textDecorationLine:'none', width:'100%'}}>Subscription</Link></MenuItem>}
                         <MenuItem><Link to = "/my-posts" style = {{textDecorationLine:'none', width:'100%'}}>My Posts</Link></MenuItem>

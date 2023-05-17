@@ -1,6 +1,7 @@
-import MyNav from "./MyNav";
+import MyNav from "../components/MyNav";
+import MyHeading from "../components/MyHeading";
 import { StyleSheet } from 'react-native';
-import { Heading, Divider, Loader, useTheme, Alert } from '@aws-amplify/ui-react';
+import { Loader, useTheme, Alert } from '@aws-amplify/ui-react';
 import { useEffect, useState } from "react";
 import { Expander, ExpanderItem } from '@aws-amplify/ui-react';
 const stripe = require('stripe')('sk_test_51HmobNIOs4Bwoex9erX63uEPKdwylY7a5f8zxvmskceNETVfJMaDzygagiugpV5xocQFVVjJEvHhslTdlHdExUs500dSOPhSrx');
@@ -28,10 +29,7 @@ export default function Insiders(props){
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
         <MyNav customerId = {props.customerId} page = 'insiders' name = {props.name}/>
         <div style = {styles.container}>
-            <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
-                <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Argano Insiders</i></Heading>
-                <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
-            </div>
+        <MyHeading title = "Argano Insiders"/>
             <br/> 
             {props.name ? 
                 <>

@@ -1,10 +1,11 @@
-import  MyNav  from './MyNav'
-import { Heading, Divider, useTheme, Button } from '@aws-amplify/ui-react'
+import { useTheme, Button } from '@aws-amplify/ui-react'
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-web';
 import { API } from 'aws-amplify';
 import { v4 as uuidv4 } from 'uuid';
+import  MyNav  from '../components/MyNav'
+import  MyHeading  from '../components/MyHeading'
 
 
 
@@ -18,11 +19,7 @@ export default function NewPost(props){
     return(
         <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
           <MyNav customerId = {props.customerId} name = {props.name} page = "new-post"/>
-          <div style = {{maxWidth:'1200px', margin:'30px auto 0 auto'}}>
-            <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>New Post</i></Heading>
-            <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
-          </div>
-          {/* <Heading level={3}>New Post</Heading> */}
+          <MyHeading title = "Create a New Post" />
           <View style = {styles.addPostContainer}>
           <TextInput value = {title} onChangeText = {(e)=> setTitle(e)} style = {styles.input} placeholder = "Enter Title"/>
           <TextInput value = {description} onChangeText = {(e)=> setDescription(e)} style = {styles.descriptionInput} 

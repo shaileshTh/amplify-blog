@@ -4,21 +4,21 @@ import "@aws-amplify/ui-react/styles.css";
 import {  BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 Amplify.configure(awsconfig);
-import Login from './src/components/Login'
-import HomePage from './src/components/HomePage'
-import NewPost from './src/components/NewPost'
-import MyPosts from './src/components/MyPosts';
-import Blog from './src/components/Blog';
-import Pricing from './src/components/Pricing';
-import Shop from './src/components/Shop';
-import Cart from './src/components/Cart';
-import Transactions from './src/components/Transactions';
-import PaymentSuccess from './src/components/PaymentSuccess';
+import Login from './src/pages/Login'
+import HomePage from './src/pages/HomePage'
+import NewPost from './src/pages/NewPost'
+import MyPosts from './src/pages/MyPosts';
+import Blog from './src/pages/Blog';
+import Pricing from './src/pages/Pricing';
+import Shop from './src/pages/Shop';
+import Cart from './src/pages/Cart';
+import Transactions from './src/pages/Transactions';
+import PaymentSuccess from './src/pages/PaymentSuccess';
 import { CartProvider } from 'react-use-cart';
 import { Helmet } from 'react-helmet';
-import Subscription from './src/components/Subscription';
-import MySubscription from './src/components/MySubscription';
-import Insiders from './src/components/Insiders';
+import Subscription from './src/pages/Subscription';
+import MySubscription from './src/pages/MySubscription';
+import Insiders from './src/pages/Insiders';
 
 
 function App(){
@@ -37,9 +37,10 @@ function App(){
       }
     }).then((r) => {
       if(r.length != 0) setStripeCustomerId(r[0].stringifiedItems)
-    })
-  })
-  .catch(e => console.log(e))
+      else setStripeCustomerId("not found")
+    }).catch(e => setStripeCustomerId("Error"))
+  }).catch(e => console.log(e))
+  
 
   Hub.listen('auth', ({ payload }) => {
     const { event } = payload;

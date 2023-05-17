@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Alert, Placeholder, Heading, Divider, useTheme } from '@aws-amplify/ui-react';
-import  MyNav  from './MyNav'
-import { Amplify, Auth, API } from 'aws-amplify';
+import { Alert, Placeholder, useTheme } from '@aws-amplify/ui-react';
+import  MyNav  from '../components/MyNav'
+import  MyHeading  from '../components/MyHeading'
+import { Auth, API } from 'aws-amplify';
 import {
     Table,
     TableCell,
@@ -45,10 +46,7 @@ export default function Transactions(props){
               Please login to view your transactions
           </Alert> : <>
     
-          <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
-            <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Your transactions</i></Heading>
-            <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
-          </div>
+        <MyHeading title = "My Transactions"/>
           
         {loaded ?
         <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto', backgroundColor:'var(--amplify-colors-background-primary)'}}>

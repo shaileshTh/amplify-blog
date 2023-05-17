@@ -1,7 +1,8 @@
-import MyNav from "./MyNav";
+import MyNav from "../components/MyNav";
+import MyHeading from "../components/MyHeading";
 import { StyleSheet } from 'react-native';
-import { Heading, Divider, useTheme } from '@aws-amplify/ui-react';
-import Product from "./Product";
+import { useTheme } from '@aws-amplify/ui-react';
+import Product from "../components/Product";
 
 
 export default function Pricing(props){
@@ -38,10 +39,7 @@ export default function Pricing(props){
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
         <MyNav customerId = {props.customerId} page = 'shop' name = {props.name}/>
         <div style = {styles.container}>
-            <div style = {{ maxWidth: '1200px', margin: '30px auto 0 auto' }}>
-                <Heading level = {2} color = {tokens.colors.brand.primary[80]}><i>Shop</i></Heading>
-                <Divider  border={`${tokens.borderWidths.large} solid ${tokens.colors.brand.primary[80]}`}/>
-            </div>
+           <MyHeading title = "My Shop"/>
 
             {products.map((p) => {
                 return(

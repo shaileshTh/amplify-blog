@@ -1,5 +1,5 @@
 import { Features2x2n, MyHeroLayout1, MyMarketingFooter } from '../ui-components';
-import  MyNav  from './MyNav'
+import  MyNav  from '../components/MyNav'
 import { StyleSheet } from 'react-native';
 
 
@@ -36,7 +36,6 @@ export default function HomePage(props){
             }}/>
             </div>
         </div>
-        /* </ThemeProvider> */
     )
 }
 
