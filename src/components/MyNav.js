@@ -64,13 +64,13 @@ export default function MyNav(props){
                         </MenuButton>
                     }
                     >
-                        <MenuItem><Link to = "/subscription" style = {{textDecorationLine:'none', width:'100%'}}>Subscription</Link></MenuItem>
+                        {!subscriptionActive && <MenuItem><Link to = "/subscription" style = {{textDecorationLine:'none', width:'100%'}}>Subscription</Link></MenuItem>}
                         <MenuItem><Link to = "/my-posts" style = {{textDecorationLine:'none', width:'100%'}}>My Posts</Link></MenuItem>
                         {subscriptionActive && <MenuItem><Link to = "/my-subscription" style = {{textDecorationLine:'none', width:'100%'}}>My Subscription</Link></MenuItem>}
                         <MenuItem> <Link to = "/my-transactions" style = {{textDecorationLine:'none', width:'100%'}}>Transactions</Link></MenuItem>
                         <MenuItem><Link to = "/new-post" style = {{textDecorationLine:'none', width:'100%'}}>New Post</Link></MenuItem>
                         <MenuItem><Link to = "/cart" style = {{textDecorationLine:'none', width:'100%'}}>Cart({totalItems})</Link></MenuItem>
-                        <MenuItem onClick = {() => signOut()}>Sign Out</MenuItem>
+                        <MenuItem onClick = {()  => signOut()}>Sign Out</MenuItem>
                     </Menu>
                 : <>{props.page != 'login' && <Link to = "/login" style = {{textDecorationLine:'none'}}>
                     <Button variation = "link" style = {styles.button}>
@@ -82,6 +82,9 @@ export default function MyNav(props){
             <div style = {{float:'right', marginRight: '10px'}}>
             <Menu>
                 <MenuItem>
+                    <Link to = "/insiders" style = {{textDecorationLine:'none', width:'100%'}}>
+                        Insiders
+                    </Link>
                     <Link to = "/pricing" style = {{textDecorationLine:'none', width:'100%'}}>
                         Pricing
                     </Link>
@@ -112,6 +115,11 @@ export default function MyNav(props){
                 {props.page != 'pricing' &&<Link to = "/pricing">
                     <Button variation = "link" style = {styles.button}>
                         Pricing
+                    </Button> 
+                </Link>}
+                {props.page != 'insiders' &&<Link to = "/insiders">
+                    <Button variation = "link" style = {styles.button}>
+                        Insiders
                     </Button> 
                 </Link>}
                 </>}

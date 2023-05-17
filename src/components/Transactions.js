@@ -57,7 +57,6 @@ export default function Transactions(props){
             <TableHead>
                 <TableRow>
                 <TableCell as="th">Payment ID</TableCell>
-                <TableCell as="th">Type</TableCell>
                 <TableCell as="th">Total</TableCell>
                 <TableCell as="th">Timestamp</TableCell>
                 <TableCell as="th">Items</TableCell>
@@ -71,9 +70,8 @@ export default function Transactions(props){
                         itemsDisplay += item.quantity + " x " + item.title + " ($"+item.itemTotal.toFixed(2) + ") • "
                     })
                     return (
-                        <TableRow>
+                        <TableRow key = {t.pId}>
                         <TableCell>{t.pId}</TableCell>
-                        <TableCell>{(t.isSubscription == 1)}</TableCell>
                         <TableCell>${t.amountInCents/100}</TableCell>
                         <TableCell>{t.timestamp.substring(0,34)}</TableCell>
                         <TableCell>{itemsDisplay}</TableCell>

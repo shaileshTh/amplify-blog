@@ -18,6 +18,7 @@ import { CartProvider } from 'react-use-cart';
 import { Helmet } from 'react-helmet';
 import Subscription from './src/components/Subscription';
 import MySubscription from './src/components/MySubscription';
+import Insiders from './src/components/Insiders';
 
 
 function App(){
@@ -49,7 +50,6 @@ function App(){
           username: username
         }
       }).then(r => console.log(r))
-
     }
   })
   
@@ -71,6 +71,7 @@ return(
       <Route path = "/pricing" element = {<Pricing customerId = {stripeCustomerId} name = {name}/>}/>
       <Route path = "/payment-success" element = {<PaymentSuccess customerId = {stripeCustomerId} name = {name}/>}/>
       <Route path = "/shop" element = {<Shop customerId = {stripeCustomerId} name = {name}/>}/>
+      <Route path = "/insiders" element = {<Insiders customerId = {stripeCustomerId} name = {name}/>}/>
       <Route path = "/" element = {<HomePage customerId = {stripeCustomerId} name = {name}/>}/>
   </Routes>
   </Router>
