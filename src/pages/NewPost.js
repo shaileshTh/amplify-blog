@@ -1,4 +1,4 @@
-import { useTheme, Button } from '@aws-amplify/ui-react'
+import { Button } from '@aws-amplify/ui-react'
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-web';
@@ -13,12 +13,11 @@ export default function NewPost(props){
     let n = 0;
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [id, setId] = useState(0)
-    const { tokens } = useTheme();
+ 
 
     return(
         <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-          <MyNav customerId = {props.customerId} name = {props.name} page = "new-post"/>
+          <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} name = {props.name} page = "new-post"/>
           <MyHeading title = "Create a New Post" />
           <View style = {styles.addPostContainer}>
           <TextInput value = {title} onChangeText = {(e)=> setTitle(e)} style = {styles.input} placeholder = "Enter Title"/>

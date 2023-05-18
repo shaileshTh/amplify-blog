@@ -68,7 +68,7 @@ export default function Cart(props) {
     };
     if (clientSecret) return(
         <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav name = {props.name} page = "cart"/>
+        <MyNav subscriptionActive = {props.subscriptionActive} name = {props.name} page = "cart"/>
         
           <MyHeading title = {"Total: $" + cartTotal.toFixed(2)}/>
 
@@ -108,7 +108,7 @@ export default function Cart(props) {
     )
     return (
         <div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav customerId = {props.customerId} name = {props.name} page = "cart"/>
+        <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} name = {props.name} page = "cart"/>
         
         <MyHeading title = {"Cart (" + totalItems + ")"}/>
         

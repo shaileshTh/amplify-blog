@@ -7,7 +7,7 @@ export default function HomePage(props){
     return(
         
         <div style = {{width:'100%', background: 'var(--amplify-colors-background-tertiary)'}}>
-            <MyNav customerId = {props.customerId} name = {props.name}/>
+            <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} name = {props.name}/>
             <div style = {styles.container}>
             <MyHeroLayout1 overrides={{
                 "subtitle": {fontFamily:'var(--amplify-fonts-default-variable)'}, 

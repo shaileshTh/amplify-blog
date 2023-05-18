@@ -15,7 +15,7 @@ export default function PaymentSuccess(props){
     emptyCart();
   
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav customerId = {props.customerId} name = {props.name}/>
+        <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} customerId = {props.customerId} name = {props.name}/>
 
         <MyHeading title = "Payment Success"/>
             <Alert style = {{fontSize: tokens.fontSizes.xl}}variation="success" heading={"Payment Intent: "+pI}>

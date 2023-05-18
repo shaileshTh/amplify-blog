@@ -6,7 +6,6 @@ import { Auth } from 'aws-amplify';
 import { useCart } from "react-use-cart"
 import { Menu, MenuItem, MenuButton } from '@aws-amplify/ui-react';
 import { useEffect, useState } from 'react';
-const stripe = require('stripe')('sk_test_51HmobNIOs4Bwoex9erX63uEPKdwylY7a5f8zxvmskceNETVfJMaDzygagiugpV5xocQFVVjJEvHhslTdlHdExUs500dSOPhSrx');
 
 async function signOut() {
   try {
@@ -21,7 +20,6 @@ async function signOut() {
 
 export default function MyNav(props){
     const { totalItems } = useCart()
-    const [subscriptionActive, setSubscriptionActive] = useState(false)
     const [widthMatch, setWidthMath] = useState(
         window.matchMedia("(max-width: 550px)").matches
     )
@@ -29,17 +27,6 @@ export default function MyNav(props){
     useEffect(() => {
         window.matchMedia("(max-width: 550px)")
         .addEventListener('change', e => setWidthMath(e.matches))
-        if(props.customerId){
-            if(props.customerId != "not found"){
-                const subscriptions = stripe.subscriptions.list({
-                    customer: props.customerId
-                });
-        
-                subscriptions.then((r) => {
-                    setSubscriptionActive(r.data[0].plan.active)
-                })
-            }
-        }
     })
 
     return(
@@ -61,27 +48,20 @@ export default function MyNav(props){
                     trigger={
                         <MenuButton style={{float:'right'}} variation="primary">
                             👤 {props.name}  
-                            {props.customerId ?
-                                <>
-                                    {props.customerId === "Error" ? 
-                                        <Badge marginLeft = "5px" size = "small" variation="error">Error loading status</Badge>
-                                        : 
-                                        <>
-                                            {subscriptionActive ? 
-                                                <Badge marginLeft = "5px" size = "small" variation="success">Subscribed</Badge>
-                                                : <Badge marginLeft = "5px" size = "small" variation="info">Not Subscribed</Badge>
-                                            }
-                                        </> }
-                                </> 
-                                : 
-                                <Badge marginLeft = "5px" size = "small" variation="info">Loading status...</Badge>
-                            }
-                                
+                            {props.error ? <Badge marginLeft = "5px" size = "small" variation="error">Error loading status</Badge> 
+                            : <>
+                                {props.subscriptionActive ? 
+                                    <Badge marginLeft = "5px" size = "small" variation="success">Subscribed</Badge>
+                                    : <Badge marginLeft = "5px" size = "small" variation="info">Not Subscribed</Badge>
+                                }
+                            </>}
+                            
+                    
                         </MenuButton>}
                     >
-                        {!subscriptionActive && <MenuItem><Link to = "/subscription" style = {{textDecorationLine:'none', width:'100%'}}>Subscription</Link></MenuItem>}
+                        {!props.subscriptionActive && <MenuItem><Link to = "/subscription" style = {{textDecorationLine:'none', width:'100%'}}>Subscription</Link></MenuItem>}
                         <MenuItem><Link to = "/my-posts" style = {{textDecorationLine:'none', width:'100%'}}>My Posts</Link></MenuItem>
-                        {subscriptionActive && <MenuItem><Link to = "/my-subscription" style = {{textDecorationLine:'none', width:'100%'}}>My Subscription</Link></MenuItem>}
+                        {props.subscriptionActive && <MenuItem><Link to = "/my-subscription" style = {{textDecorationLine:'none', width:'100%'}}>My Subscription</Link></MenuItem>}
                         <MenuItem> <Link to = "/my-transactions" style = {{textDecorationLine:'none', width:'100%'}}>Transactions</Link></MenuItem>
                         <MenuItem><Link to = "/new-post" style = {{textDecorationLine:'none', width:'100%'}}>New Post</Link></MenuItem>
                         <MenuItem><Link to = "/cart" style = {{textDecorationLine:'none', width:'100%'}}>Cart({totalItems})</Link></MenuItem>

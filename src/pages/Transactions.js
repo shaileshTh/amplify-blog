@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, Placeholder, useTheme } from '@aws-amplify/ui-react';
+import { Alert, Placeholder } from '@aws-amplify/ui-react';
 import  MyNav  from '../components/MyNav'
 import  MyHeading  from '../components/MyHeading'
 import { Auth, API } from 'aws-amplify';
@@ -13,7 +13,6 @@ import {
 
 
 export default function Transactions(props){
-    const { tokens } = useTheme();
     
     const [loaded, setLoaded] = useState(false);
     const [transcations, setTranscations] = useState([])
@@ -39,7 +38,7 @@ export default function Transactions(props){
 
 
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav customerId = {props.customerId} name = {props.name} page = "my-transactions"/>
+        <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} name = {props.name} page = "my-transactions"/>
 
         {props.name === undefined ? <Alert variation='warning' 
             style = {{fontSize:'x-large', maxWidth: '1200px', margin: '30px auto'}}>

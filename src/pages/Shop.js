@@ -37,7 +37,7 @@ export default function Pricing(props){
     ]
       
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav customerId = {props.customerId} page = 'shop' name = {props.name}/>
+        <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} page = 'shop' name = {props.name}/>
         <div style = {styles.container}>
            <MyHeading title = "My Shop"/>
 

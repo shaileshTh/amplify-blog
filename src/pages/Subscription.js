@@ -6,9 +6,8 @@ import { useTheme, Alert } from '@aws-amplify/ui-react';
 
 
 export default function Subscription(props){
-    const { tokens } = useTheme();
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav customerId = {props.customerId} page = 'subscription' name = {props.name}/>
+        <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} page = 'subscription' name = {props.name}/>
         <div style = {styles.container}>
             <MyHeading title = "Subscription" />
             {props.name === undefined ? <Alert variation='warning' 

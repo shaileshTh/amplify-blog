@@ -19,26 +19,39 @@ import { Helmet } from 'react-helmet';
 import Subscription from './src/pages/Subscription';
 import MySubscription from './src/pages/MySubscription';
 import Insiders from './src/pages/Insiders';
+const stripe = require('stripe')('sk_test_51HmobNIOs4Bwoex9erX63uEPKdwylY7a5f8zxvmskceNETVfJMaDzygagiugpV5xocQFVVjJEvHhslTdlHdExUs500dSOPhSrx');
 
 
 function App(){
   const [name, setName] = useState()
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
-  const [stripeCustomerId, setStripeCustomerId] = useState()
+  const [subscriptionActive, setSubscriptionActive] = useState(false)
+  const [errorSubStatus , setErrorSubStatus] = useState(false)
+  const [customerId , setCustomerId] = useState()
   
   Auth.currentAuthenticatedUser().then((u)=>{
     setName(u.attributes.name)
     setUsername(u.username)
     setEmail(u.attributes.email)
+
     API.post("myAPI", "/get-subscription-status", {
       body: {
         username: u.username
       }
     }).then((r) => {
-      if(r.length != 0) setStripeCustomerId(r[0].stringifiedItems)
-      else setStripeCustomerId("not found")
-    }).catch(e => setStripeCustomerId("Error"))
+      if(r.length != 0) {
+        setCustomerId(r[0].stringifiedItems)
+        const subscriptions = stripe.subscriptions.list({
+          customer: r[0].stringifiedItems
+        });
+
+        subscriptions.then((r) => {
+            setSubscriptionActive(r.data[0].plan.active)
+        })
+      }
+    }).catch(e => setErrorSubStatus(true))
+
   }).catch(e => console.log(e))
   
 
@@ -62,18 +75,18 @@ return(
   <Router>
   <Routes>
       <Route path = "/login" element = {<Login/>}/>
-      <Route path = "/subscription" element = {<Subscription customerId = {stripeCustomerId} email = {email} username = {username} name = {name}/>}/>
-      <Route path = "/my-subscription" element = {<MySubscription customerId = {stripeCustomerId} email = {email} username = {username} name = {name}/>}/>
-      <Route path = "/new-post" element = {<NewPost customerId = {stripeCustomerId} username = {username} name = {name}/>}/>
-      <Route path = "/my-posts" element = {<MyPosts customerId = {stripeCustomerId} name = {name}/>}/>
-      <Route path = "/my-transactions" element = {<Transactions customerId = {stripeCustomerId} name = {name}/>}/>
-      <Route path = "/blog" element = {<Blog customerId = {stripeCustomerId} name = {name}/>}/>
-      <Route path = "/cart" element = {<Cart customerId = {stripeCustomerId} name = {name} email = {email}/>}/>
-      <Route path = "/pricing" element = {<Pricing customerId = {stripeCustomerId} name = {name}/>}/>
-      <Route path = "/payment-success" element = {<PaymentSuccess customerId = {stripeCustomerId} name = {name}/>}/>
-      <Route path = "/shop" element = {<Shop customerId = {stripeCustomerId} name = {name}/>}/>
-      <Route path = "/insiders" element = {<Insiders customerId = {stripeCustomerId} name = {name}/>}/>
-      <Route path = "/" element = {<HomePage customerId = {stripeCustomerId} name = {name}/>}/>
+      <Route path = "/subscription" element = {<Subscription error = {errorSubStatus} subscriptionActive = {subscriptionActive} email = {email} username = {username} name = {name}/>}/>
+      <Route path = "/my-subscription" element = {<MySubscription customerId = {customerId} error = {errorSubStatus} subscriptionActive = {subscriptionActive} email = {email} username = {username} name = {name}/>}/>
+      <Route path = "/new-post" element = {<NewPost error = {errorSubStatus} subscriptionActive = {subscriptionActive} username = {username} name = {name}/>}/>
+      <Route path = "/my-posts" element = {<MyPosts error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
+      <Route path = "/my-transactions" element = {<Transactions error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
+      <Route path = "/blog" element = {<Blog error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
+      <Route path = "/cart" element = {<Cart error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name} email = {email}/>}/>
+      <Route path = "/pricing" element = {<Pricing error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
+      <Route path = "/payment-success" element = {<PaymentSuccess error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
+      <Route path = "/shop" element = {<Shop error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
+      <Route path = "/insiders" element = {<Insiders customerId = {customerId} error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
+      <Route path = "/" element = {<HomePage error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
   </Routes>
   </Router>
   </CartProvider>

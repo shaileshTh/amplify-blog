@@ -8,9 +8,8 @@ import { Link } from 'react-router-dom'
 
 
 export default function Pricing(props){
-    const { tokens } = useTheme();
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav customerId = {props.customerId} page = 'pricing' name = {props.name}/>
+        <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} page = 'pricing' name = {props.name}/>
         <div style = {styles.container}>
             <MyHeading title = "Pricing"/>
             {props.name === undefined ? <Alert variation='warning' 

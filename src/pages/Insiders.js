@@ -18,7 +18,6 @@ export default function Insiders(props){
             
             subscriptions.then((r) => {
                 stripe.products.retrieve(r.data[0].plan.product).then((r) => {
-                    console.log(r)
                     setSubscriptionDetails(r)
                 })
             })
@@ -27,7 +26,7 @@ export default function Insiders(props){
 
     const { tokens } = useTheme();
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav customerId = {props.customerId} page = 'insiders' name = {props.name}/>
+        <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} page = 'insiders' name = {props.name}/>
         <div style = {styles.container}>
         <MyHeading title = "Argano Insiders"/>
             <br/> 

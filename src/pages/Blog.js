@@ -25,7 +25,7 @@ export default function Blog(props){
 
 
     return(<div style = {{width:'100%', backgroundColor:'var(--amplify-colors-background-tertiary)'}}>
-        <MyNav customerId = {props.customerId} name = {props.name} page = "blog"/>
+        <MyNav error = {props.error} subscriptionActive = {props.subscriptionActive} name = {props.name} page = "blog"/>
         
         <MyHeading title = "Blog"/>
           
