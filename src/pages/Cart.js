@@ -41,6 +41,7 @@ export default function Cart(props) {
         delete item.description
         delete item.new
         delete item.imgsrc
+        delete item.userDescription
         return item
       })
         setCreatingIntent(true)

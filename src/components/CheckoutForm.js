@@ -53,7 +53,7 @@ export default function CheckoutForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await Analytics.updateEndpoint({
+     Analytics.updateEndpoint({
       address: props.email,
       attributes: {
         purchased: ['Yes']
@@ -61,7 +61,7 @@ export default function CheckoutForm(props) {
       channelType: 'EMAIL'
     })
 
-    await Analytics.record({
+     Analytics.record({
         name: 'checkout',
         immediate: true
     })

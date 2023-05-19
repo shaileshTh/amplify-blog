@@ -26,9 +26,9 @@ export default function Product(props){
                 ${props.price}
             </Text>
             <Flex>
-                {props.loggedIn ? <Button variation="primary" onClick={async () => {
+                {props.loggedIn ? <Button variation="primary" onClick={ () => {
                     addItem(props)
-                    await Analytics.updateEndpoint({
+                     Analytics.updateEndpoint({
                         address: props.userDescription.email,
                         attributes:{
                             purchased: ['No']
@@ -36,7 +36,7 @@ export default function Product(props){
                         channelType: 'EMAIL'
                     })
 
-                    await Analytics.record({
+                     Analytics.record({
                         name: 'addToCart',
                         immediate: true
                     })
