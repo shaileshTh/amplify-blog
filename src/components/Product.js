@@ -1,9 +1,10 @@
 import { Button, Badge, Card, Flex, Text, Image, StepperField } from '@aws-amplify/ui-react';
+import { Analytics } from 'aws-amplify';
 import { useCart } from "react-use-cart"
 
 export default function Product(props){
     const { addItem, updateItemQuantity } = useCart()
-    
+ 
     return(
         <Card variation="elevated" style = {{marginTop: '30px', marginBottom:'30px'}}>
         <Flex alignItems="flex-start">
@@ -25,7 +26,21 @@ export default function Product(props){
                 ${props.price}
             </Text>
             <Flex>
-                {props.loggedIn ? <Button variation="primary" onClick={() => addItem(props)}>Add to cart</Button> :
+                {props.loggedIn ? <Button variation="primary" onClick={async () => {
+                    addItem(props)
+                    await Analytics.updateEndpoint({
+                        address: props.userDescription.email,
+                        attributes:{
+                            purchased: ['No']
+                        },
+                        channelType: 'EMAIL'
+                    })
+
+                    await Analytics.record({
+                        name: 'addToCart',
+                        immediate: true
+                    })
+                }}>Add to cart</Button> :
                 <Button isDisabled  = {true} >Login to add to cart</Button>}
             </Flex>
             </Flex>

@@ -2,7 +2,7 @@ import { Amplify, Auth, Hub, API } from 'aws-amplify';
 import awsconfig from './src/aws-exports';
 import "@aws-amplify/ui-react/styles.css";
 import {  BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 Amplify.configure(awsconfig);
 import Login from './src/pages/Login'
 import HomePage from './src/pages/HomePage'
@@ -30,6 +30,7 @@ function App(){
   const [errorSubStatus , setErrorSubStatus] = useState(false)
   const [customerId , setCustomerId] = useState()
   
+
   Auth.currentAuthenticatedUser().then((u)=>{
     setName(u.attributes.name)
     setUsername(u.username)
@@ -84,7 +85,7 @@ return(
       <Route path = "/cart" element = {<Cart error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name} email = {email}/>}/>
       <Route path = "/pricing" element = {<Pricing error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
       <Route path = "/payment-success" element = {<PaymentSuccess error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
-      <Route path = "/shop" element = {<Shop error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
+      <Route path = "/shop" element = {<Shop error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name} email = {email}/>}/>
       <Route path = "/insiders" element = {<Insiders customerId = {customerId} error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
       <Route path = "/" element = {<HomePage error = {errorSubStatus} subscriptionActive = {subscriptionActive} name = {name}/>}/>
   </Routes>

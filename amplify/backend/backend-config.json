@@ -1,4 +1,10 @@
 {
+  "analytics": {
+    "myPinpoint": {
+      "providerPlugin": "awscloudformation",
+      "service": "Pinpoint"
+    }
+  },
   "api": {
     "myAPI": {
       "dependsOn": [

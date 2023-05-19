@@ -1,9 +1,15 @@
 import { Features2x2n, MyHeroLayout1, MyMarketingFooter } from '../ui-components';
 import  MyNav  from '../components/MyNav'
 import { StyleSheet } from 'react-native';
+import { Analytics } from 'aws-amplify';
+import { useEffect } from 'react'
 
 
 export default function HomePage(props){
+    // useEffect(() => {
+    //     Analytics.record('Home Page Visit')
+    //   })
+    
     return(
         
         <div style = {{width:'100%', background: 'var(--amplify-colors-background-tertiary)'}}>

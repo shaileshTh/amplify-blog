@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Analytics } from 'aws-amplify';
+
 import {
   PaymentElement,
   LinkAuthenticationElement,
@@ -51,7 +53,18 @@ export default function CheckoutForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await Analytics.updateEndpoint({
+      address: props.email,
+      attributes: {
+        purchased: ['Yes']
+      },
+      channelType: 'EMAIL'
+    })
 
+    await Analytics.record({
+        name: 'checkout',
+        immediate: true
+    })
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.

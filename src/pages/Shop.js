@@ -1,13 +1,19 @@
 import MyNav from "../components/MyNav";
 import MyHeading from "../components/MyHeading";
 import { StyleSheet } from 'react-native';
-import { useTheme } from '@aws-amplify/ui-react';
 import Product from "../components/Product";
-
+import { useEffect } from 'react'
+import { Analytics } from 'aws-amplify';
 
 export default function Pricing(props){
-    const { tokens } = useTheme();
     let loggedIn = false
+    useEffect(() => {
+        Analytics.record({ 
+            name: 'shopVisit',
+            immediate: true
+        });
+    })
+    
     {props.name ? loggedIn = true : loggedIn = false}
     const products = [
         {
@@ -43,7 +49,7 @@ export default function Pricing(props){
 
             {products.map((p) => {
                 return(
-                <Product loggedIn = {loggedIn} id = {p.id} key = {p.id} title = {p.title} description = {p.description} price = {p.price} new = {p.new} imgsrc = {p.imgsrc}/>
+                <Product userDescription = {props} loggedIn = {loggedIn} id = {p.id} key = {p.id} title = {p.title} description = {p.description} price = {p.price} new = {p.new} imgsrc = {p.imgsrc}/>
                 )
             })}
         </div>

@@ -18,6 +18,7 @@ export default function MySubscription(props){
             
             subscriptions.then((r) => {
                 stripe.products.retrieve(r.data[0].plan.product).then((r) => {
+                    console.log(r)
                     setSubscriptionDetails(r)
                 })
             })
